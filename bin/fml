@@ -1,0 +1,12 @@
+#!/bin/sh
+
+LAST_CHECK_FILE="./.last-fml"
+
+if [ ! -e $LAST_CHECK_FILE ]
+then
+  touch -t 199101010101 $LAST_CHECK_FILE
+fi
+
+find . -name '*.py' -newer $LAST_CHECK_FILE -exec egrep -ni --colour -e "--$USER" {} ';' \
+    -printf '========>> %p\n\n\n'
+touch $LAST_CHECK_FILE

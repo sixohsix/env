@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ "$1" ]
+then
+  find . -name '*.py' -exec egrep -ni --colour -e "$*" {} ';' -printf '========>> %p\n\n\n'
+else
+  echo "USAGE"
+  echo "  ff <search_string>"
+fi
+

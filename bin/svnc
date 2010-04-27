@@ -1,0 +1,16 @@
+#!/bin/sh
+
+if [ "$1" ]
+then
+  FML=`fml`
+  if [ "$FML" ]
+  then
+    echo "Probably not a good idea..."
+    echo "$FML"
+  else
+    svn commit -m "`echo "$*" | fold -s`"
+  fi
+else
+  echo "USAGE"
+  echo "  svnc <commit_msg>"
+fi

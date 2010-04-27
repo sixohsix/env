@@ -1,0 +1,3 @@
+#!/bin/sh
+
+svn log `svn info | grep URL | awk '{print $2}'` --stop-on-copy | less

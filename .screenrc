@@ -1,0 +1,11 @@
+startup_message off
+vbell off
+defscrollback 8000
+autodetach on
+defutf8 on
+
+hardstatus alwayslastline
+hardstatus string '%{= kG}%-Lw%{= kW}%50> %n*%f %t%{= kG}%+Lw%< %{= kG}%-=%D %m/%d/%y | %c | %1`%{-}'
+
+screen -t shell 0 bash
+
