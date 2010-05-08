@@ -59,6 +59,8 @@
 ;; Use M-x kill-emacs if you really want to quit.
 (global-set-key 
   (read-kbd-macro "C-x C-c") 'nil)
+(global-set-key 
+  (read-kbd-macro "C-x C-c q") 'kill-emacs)
 
 
 (defvar iresize-mode-map 
