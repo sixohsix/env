@@ -1,0 +1,9 @@
+[user]
+	name = Mike Verdone
+	email = mike.verdone@ableton.com
+[instaweb]
+        local = True
+        browser = chrome
+
+[browser "chrome"]
+        cmd = google-chrome
