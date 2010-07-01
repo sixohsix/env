@@ -1,10 +1,19 @@
-#!/bin/sh
+#!/usr/bin/env python
 
-if [ "$1" ]
-then
-  find . -name '*.py' -exec egrep -ni --colour -e "$*" {} ';' -printf '========>> %p\n\n\n'
-else
-  echo "USAGE"
-  echo "  ff <search_string>"
-fi
+import os
+import sys
 
+if __name__=='__main__':
+    args = sys.argv[1:]
+    if not args:
+        print "USAGE"
+        print "  ff [-t type] <search_string>"
+        sys.exit(1)
+
+    t = 'py'
+    if args[0] == '-t':
+        t = args[1]
+        args = args[2:]
+
+    os.execlp('find', '.', '-name', '*.' + t, '-exec', 
+              'egrep', '-ni', '--colour', '-e', ' '.join(args), '{}', ';', '-printf', '========>> %p\n\n\n')
