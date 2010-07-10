@@ -16,6 +16,9 @@
 
 (add-to-list 'load-path "~/.emacs-lib")
 
+;; Tabs, I hate you. Get out.
+(setq-default indent-tabs-mode nil)
+
 ;; No Bullshit mode.
 (setq inhibit-splash-screen t)
 (menu-bar-mode 0)
@@ -25,6 +28,31 @@
 (setq-default scroll-step 1)               ; turn off jumpy scroll
 (setq-default visible-bell t)              ; no beeps, flash on errors
 (column-number-mode t)                     ; display the column number on modeline
+
+;; Insert mode is garbage.
+(global-set-key
+  (read-kbd-macro "<insert>") 'nil)
+
+
+;; GTFO trailing spaces, who asked YOU to this party?!
+(defun ableton-trailing-ws-load ()
+  (interactive)
+  (let (
+    (filename (buffer-file-name (current-buffer)))
+    )
+    (if (string-match ".*\\.py" filename)
+      (setq show-trailing-whitespace t)
+    )
+  )
+)
+(defun ableton-trailing-ws-save ()
+  (interactive)
+  (if show-trailing-whitespace
+    (delete-trailing-whitespace)
+  )
+)
+(add-hook 'find-file-hook 'ableton-trailing-ws-load)
+(add-hook 'before-save-hook 'ableton-trailing-ws-save)
 
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'reverse)
@@ -56,11 +84,26 @@
   )
 (global-set-key [f5] 'refresh-file)
 
-;; Use M-x kill-emacs if you really want to quit.
+;; Anti-fat-finger quit mode
 (global-set-key 
   (read-kbd-macro "C-x C-c") 'nil)
 (global-set-key 
-  (read-kbd-macro "C-x C-c q") 'kill-emacs)
+  (read-kbd-macro "C-x C-c q q") 'kill-emacs)
+
+;; Meta-left and right to switch buffers
+(global-set-key 
+  (read-kbd-macro "M-<left>") 'next-buffer)
+(global-set-key 
+  (read-kbd-macro "M-<right>") 'previous-buffer)
+
+;; Super-left and right to switch windows
+(global-set-key 
+  (read-kbd-macro "s-<left>") 'previous-multiframe-window)
+(global-set-key 
+  (read-kbd-macro "s-<right>") 'next-multiframe-window)
+
+(global-set-key 
+  (read-kbd-macro "s-k") 'kill-this-buffer)
 
 
 (defvar iresize-mode-map 
@@ -92,10 +135,8 @@
 ;;(eval-after-load "pymacs"
 ;;  '(add-to-list 'pymacs-load-path ".emacs-lib/python"))
 
+(require 'magit)
 
-;; Set up pycomplete
-;;(require 'pycomplete)
-;;(setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
-;;(autoload 'python-mode "python-mode" "Python editing mode." t)
-;;(setq interpreter-mode-alist(cons '("python" . python-mode)
-;;                            interpreter-mode-alist))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
+(autoload 'javascript-mode "javascript" nil t)
+

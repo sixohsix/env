@@ -92,7 +92,7 @@ alias ll='ls -l'
 #alias l='ls -CF'
 alias emacs=emacs23
 alias ac='deactivate; '
-alias n='nosetests -vs'
+alias n='nosetests -vs --nologcapture'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -118,6 +118,8 @@ _vem_activate()
 }
 complete -F _vem_activate vem_activate
 
+#
+# Activate the virtualenv whose name is the current working directory
 function vemac()
 {
   deactivate;
@@ -125,6 +127,9 @@ function vemac()
   vem_activate $vename
 }
 
+# 
+# Remove, recreate, and activate the virtualenv whose name is the
+# current working directory, then run "python setup.py develop".
 function vemfresh()
 {
   deactivate;
@@ -136,4 +141,7 @@ function vemfresh()
 }
 
 export PYTHONSTARTUP=$HOME/.pystartup
-export PATH=$HOME/bin:/usr/local/java/jdk/bin:/opt/git/bin/:$PATH
+export PATH=$HOME/bin:/usr/local/java/jdk/bin:$PATH
+
+# Stop fucking with my exclamation points! (Turn off history expansion)
+set +H
