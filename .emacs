@@ -65,6 +65,8 @@
 
 (global-set-key 
   (read-kbd-macro "C-x p") "import pdb; pdb.set_trace() # --miv DEBUG")
+(global-set-key 
+  (read-kbd-macro "C-x P") "<?python\n  import pdb; pdb.set_trace() # --miv DEBUG\n ?>\n")
 (global-set-key
   (read-kbd-macro "s-`") 'next-buffer)
 (global-set-key
@@ -130,5 +132,8 @@
 
 (require 'magit)
 
-(add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
-(autoload 'javascript-mode "javascript" nil t)
+;;(add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
+;;(autoload 'javascript-mode "javascript" nil t)
+
+(autoload 'js2-mode "js2" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
