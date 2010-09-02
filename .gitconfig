@@ -5,5 +5,5 @@
         local = True
         browser = chrome
 
-[browser "chrome"]
-        cmd = google-chrome
+#[browser "chrome"]
+#        cmd = google-chrome

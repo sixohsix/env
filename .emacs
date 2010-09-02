@@ -15,6 +15,7 @@
  '(mode-line-inactive ((t (:inherit mode-line :background "MediumPurple4" :foreground "grey80" :box -1 :weight light)))))
 
 (add-to-list 'load-path "~/.emacs-lib")
+(add-to-list 'load-path "~/.emacs-lib/yasnippet-0.6.1c")
 
 ;; Tabs, I hate you. Get out.
 (setq-default indent-tabs-mode nil)
@@ -137,3 +138,9 @@
 
 (autoload 'js2-mode "js2" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+
+(put 'narrow-to-region 'disabled nil)
+
+(require 'yasnippet)
+(yas/initialize)
+(yas/load-directory "~/.emacs-lib/yasnippet-0.6.1c/snippets")
