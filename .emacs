@@ -123,8 +123,8 @@
 
 
 (require 'color-theme)
-(load-library "color-theme-wombat")
-(color-theme-wombat)
+(load-library "color-theme-monokai_dark")
+(color-theme-monokai_dark)
 
 ;; Set up pymacs: emacs-python integration
 ;;(autoload 'pymacs-apply "pymacs")
