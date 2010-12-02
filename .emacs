@@ -3,16 +3,16 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- )
+ '(ecb-options-version "2.32"))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(default ((t (:stipple nil :background "black" :foreground "MediumPurple2" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 122 :width normal :foundry "unknown" :family "Inconsolata"))))
- '(cursor ((t (:background "orange"))))
- '(mode-line ((t (:background "DarkOrchid3" :foreground "#101010" :box (:line-width -1 :color "grey")))))
- '(mode-line-inactive ((t (:inherit mode-line :background "MediumPurple4" :foreground "grey80" :box -1 :weight light)))))
+ '(default ((t (:stipple nil :background "black" :foreground "SlateGray4" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 122 :width normal :foundry "unknown" :family "Inconsolata"))))
+ '(cursor ((t (:background "cyan1"))))
+ '(mode-line ((t (:background "SlateGray2" :foreground "#101010" :box (:line-width -1 :color "grey")))))
+ '(mode-line-inactive ((t (:inherit mode-line :background "SlateGray4" :foreground "grey80" :box -1 :weight light)))))
 
 (add-to-list 'load-path "~/.emacs-lib")
 (add-to-list 'load-path "~/.emacs-lib/yasnippet-0.6.1c")
@@ -122,25 +122,22 @@
   (read-kbd-macro "C-x t w") 'iresize-mode)
 
 
+(require 'color-theme)
+(load-library "color-theme-wombat")
+(color-theme-wombat)
+
 ;; Set up pymacs: emacs-python integration
-(autoload 'pymacs-apply "pymacs")
-(autoload 'pymacs-call "pymacs")
-(autoload 'pymacs-eval "pymacs" nil t)
-(autoload 'pymacs-exec "pymacs" nil t)
-(autoload 'pymacs-load "pymacs" nil t)
-(eval-after-load "pymacs"
-  '(add-to-list 'pymacs-load-path ".emacs-lib/python"))
+;;(autoload 'pymacs-apply "pymacs")
+;;(autoload 'pymacs-call "pymacs")
+;;(autoload 'pymacs-eval "pymacs" nil t)
+;;(autoload 'pymacs-exec "pymacs" nil t)
+;;(autoload 'pymacs-load "pymacs" nil t)
+;;(eval-after-load "pymacs"
+;;  '(add-to-list 'pymacs-load-path ".emacs-lib/python"))
 
 (require 'magit)
-
-;;(add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
-;;(autoload 'javascript-mode "javascript" nil t)
 
 (autoload 'js2-mode "js2" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
 (put 'narrow-to-region 'disabled nil)
-
-(require 'yasnippet)
-(yas/initialize)
-(yas/load-directory "~/.emacs-lib/yasnippet-0.6.1c/snippets")
