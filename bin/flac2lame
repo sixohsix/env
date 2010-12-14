@@ -1,0 +1,4 @@
+#!/bin/sh
+
+mkdir -p "$HOME/Compressed Audio"
+for file in *.flac; do $(flac -cd "$file" | lame -q2 -V0 - "$HOME/Compressed Audio/${file%.flac}.mp3"); done

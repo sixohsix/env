@@ -1,9 +1,3 @@
-(custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- )
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
@@ -15,6 +9,7 @@
  '(mode-line-inactive ((t (:inherit mode-line :background "Black" :foreground "CornflowerBlue" :box -1 :weight light)))))
 
 (add-to-list 'load-path "~/.emacs-lib")
+(add-to-list 'load-path "~/.emacs-lib/yasnippet-0.6.1c")
 
 ;; Tabs, I hate you. Get out.
 (setq-default indent-tabs-mode nil)
@@ -68,6 +63,8 @@
 
 (global-set-key 
   (read-kbd-macro "C-x p") "import pdb; pdb.set_trace() # --miv DEBUG")
+(global-set-key 
+  (read-kbd-macro "C-x P") "<?python\n  import pdb; pdb.set_trace() # --miv DEBUG\n ?>\n")
 (global-set-key
   (read-kbd-macro "s-`") 'next-buffer)
 (global-set-key
@@ -126,6 +123,10 @@
   (read-kbd-macro "C-x t w") 'iresize-mode)
 
 
+(require 'color-theme)
+(load-library "color-theme-monokai_dark")
+(color-theme-monokai_dark)
+
 ;; Set up pymacs: emacs-python integration
 ;;(autoload 'pymacs-apply "pymacs")
 ;;(autoload 'pymacs-call "pymacs")
@@ -137,6 +138,7 @@
 
 (require 'magit)
 
-(add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
-(autoload 'javascript-mode "javascript" nil t)
+(autoload 'js2-mode "js2" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
+(put 'narrow-to-region 'disabled nil)
