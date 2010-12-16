@@ -141,3 +141,6 @@
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
 (put 'narrow-to-region 'disabled nil)
+
+;; Automagically tab new lines
+(global-set-key (kbd "RET") 'reindent-then-newline-and-indent)
