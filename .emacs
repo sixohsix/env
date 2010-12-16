@@ -3,7 +3,7 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(default ((t (:stipple nil :background "black" :foreground "SlateGray4" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 160 :width normal :foundry "apple" :family "Inconsolata"))))
+ '(default ((t (:stipple nil :background "black" :foreground "SlateGray4" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 122 :width normal :foundry "unknown" :family "Inconsolata"))))
  '(cursor ((t (:background "orange"))))
  '(mode-line ((t (:background "CornflowerBlue" :foreground "#101010" :box (:line-width -1 :color "SlateGray3")))))
  '(mode-line-inactive ((t (:inherit mode-line :background "Black" :foreground "CornflowerBlue" :box -1 :weight light)))))
@@ -20,9 +20,10 @@
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 
-(setq-default scroll-step 1)               ; turn off jumpy scroll
-(setq-default visible-bell t)              ; no beeps, flash on errors
-(column-number-mode t)                     ; display the column number on modeline
+(setq-default scroll-step 1)   ; turn off jumpy scroll
+(setq-default visible-bell t)  ; no beeps, flash on errors
+(column-number-mode t)         ; display the column number on modeline
+(show-paren-mode t)            ; highlight parens
 
 ;; Insert mode is garbage.
 (global-set-key
@@ -66,16 +67,15 @@
 (global-set-key 
   (read-kbd-macro "C-x P") "<?python\n  import pdb; pdb.set_trace() # --miv DEBUG\n ?>\n")
 (global-set-key
-  (read-kbd-macro "s-`") 'next-buffer)
-(global-set-key
   (read-kbd-macro "s-q") 'buffer-menu)
 
-;; Use F5 to refresh a file.
-(defun refresh-file ()
+;; Use F5 or Super-R to refresh a file.
+(defun really-refresh-file ()
   (interactive)
   (revert-buffer t t t)
   )
-(global-set-key [f5] 'refresh-file)
+(global-set-key [f5] 'really-refresh-file)
+(global-set-key (read-kbd-macro "s-r") 'really-refresh-file)
 
 ;; Anti-fat-finger quit mode
 (global-set-key 
@@ -147,6 +147,9 @@
 ;;
 (when (string= "Darwin\n" (shell-command-to-string "uname"))
   ;; C-Backslash is delete.
-  (global-set-key 
-   (read-kbd-macro "C-\\") 'delete-char)
+  (global-set-key (read-kbd-macro "C-\\") 'delete-char)
+
+  ;; Apple wants a bigger font for some reason
+  (set-face-attribute 'default nil
+                      :height 160)
   )
