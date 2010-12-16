@@ -70,10 +70,6 @@
 (global-set-key
   (read-kbd-macro "s-q") 'buffer-menu)
 
-;; C-Backslash is delete.
-(global-set-key 
-  (read-kbd-macro "C-\\") 'delete-char)
-
 ;; Use F5 to refresh a file.
 (defun refresh-file ()
   (interactive)
@@ -145,3 +141,12 @@
 
 ;; Automagically tab new lines
 (global-set-key (kbd "RET") 'reindent-then-newline-and-indent)
+
+;;
+;; Mac only stuff
+;;
+(when (string= "Darwin\n" (shell-command-to-string "uname"))
+  ;; C-Backslash is delete.
+  (global-set-key 
+   (read-kbd-macro "C-\\") 'delete-char)
+  )
