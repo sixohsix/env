@@ -3,13 +3,14 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(default ((t (:stipple nil :background "black" :foreground "SlateGray4" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 160 :width normal :foundry "apple" :family "Inconsolata"))))
+ '(default ((t (:stipple nil :background "black" :foreground "SlateGray4" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 122 :width normal :foundry "unknown" :family "Inconsolata"))))
  '(cursor ((t (:background "orange"))))
  '(mode-line ((t (:background "CornflowerBlue" :foreground "#101010" :box (:line-width -1 :color "SlateGray3")))))
- '(mode-line-inactive ((t (:inherit mode-line :background "Black" :foreground "CornflowerBlue" :box -1 :weight light)))))
+ '(mode-line-inactive ((t (:inherit mode-line :background "NavyBlue" :foreground "CornflowerBlue" :box -1 :weight light))))
+ )
 
 (add-to-list 'load-path "~/.emacs-lib")
-(add-to-list 'load-path "~/.emacs-lib/yasnippet-0.6.1c")
+;;(add-to-list 'load-path "~/.emacs-lib/yasnippet-0.6.1c")
 
 ;; Tabs, I hate you. Get out.
 (setq-default indent-tabs-mode nil)
@@ -145,7 +146,7 @@
 ;;
 ;; Mac only stuff
 ;;
-(when (string= "Darwin\n" (shell-command-to-string "uname"))
+(when (string= "ingot\n" (shell-command-to-string "hostname"))
   ;; C-Backslash is delete.
   (global-set-key 
    (read-kbd-macro "C-\\") 'delete-char)
