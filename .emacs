@@ -25,6 +25,7 @@
 (setq-default visible-bell nil)
 (column-number-mode t)                     ; display the column number on modeline
 
+
 ;; Insert mode is garbage.
 (global-set-key
   (read-kbd-macro "<insert>") 'nil)
@@ -153,3 +154,17 @@
 
   (setq-default visible-bell t)
   )
+
+
+;;
+;; Work-only stuff
+;;
+(when (string= "client8136\n" (shell-command-to-string "hostname"))
+  (if (eq 'x window-system)
+      (setq default-frame-alist
+            '((top . 0) (left . 400)
+              (width . 96) (height . 63))
+            )
+    )
+  )
+
