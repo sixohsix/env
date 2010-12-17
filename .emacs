@@ -22,7 +22,7 @@
 (scroll-bar-mode 0)
 
 (setq-default scroll-step 1)               ; turn off jumpy scroll
-(setq-default visible-bell t)              ; no beeps, flash on errors
+(setq-default visible-bell nil)
 (column-number-mode t)                     ; display the column number on modeline
 
 ;; Insert mode is garbage.
@@ -150,4 +150,6 @@
   ;; C-Backslash is delete.
   (global-set-key 
    (read-kbd-macro "C-\\") 'delete-char)
+
+  (setq-default visible-bell t)
   )
