@@ -10,7 +10,6 @@
  )
 
 (add-to-list 'load-path "~/.emacs-lib")
-;;(add-to-list 'load-path "~/.emacs-lib/yasnippet-0.6.1c")
 
 ;; Tabs, I hate you. Get out.
 (setq-default indent-tabs-mode nil)
@@ -92,10 +91,13 @@
   (read-kbd-macro "M-<right>") 'previous-buffer)
 
 ;; Super-left and right to switch windows
-(global-set-key 
-  (read-kbd-macro "s-<left>") 'previous-multiframe-window)
-(global-set-key 
-  (read-kbd-macro "s-<right>") 'next-multiframe-window)
+;; (global-set-key 
+;;   (read-kbd-macro "s-<left>") 'previous-multiframe-window)
+;; (global-set-key 
+;;   (read-kbd-macro "s-<right>") 'next-multiframe-window)
+
+;; Move around split buffers using meta key and arrows
+(windmove-default-keybindings 'meta)
 
 (global-set-key 
   (read-kbd-macro "s-k") 'kill-this-buffer)
@@ -143,6 +145,14 @@
 
 ;; Automagically tab new lines
 (global-set-key (kbd "RET") 'reindent-then-newline-and-indent)
+
+
+;; yasnippet
+(add-to-list 'load-path "~/.emacs-lib/yasnippet-0.6.1c")
+(require 'yasnippet)
+(yas/initialize)
+(yas/load-directory "~/.emacs-lib/yasnippet-0.6.1c/snippets")
+
 
 ;;
 ;; Mac only stuff
