@@ -6,10 +6,10 @@
  '(default ((t (:stipple nil :background "black" :foreground "SlateGray4" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 122 :width normal :foundry "unknown" :family "Inconsolata"))))
  '(cursor ((t (:background "orange"))))
  '(mode-line ((t (:background "CornflowerBlue" :foreground "#101010" :box (:line-width -1 :color "SlateGray3")))))
- '(mode-line-inactive ((t (:inherit mode-line :background "Black" :foreground "CornflowerBlue" :box -1 :weight light)))))
+ '(mode-line-inactive ((t (:inherit mode-line :background "NavyBlue" :foreground "CornflowerBlue" :box -1 :weight light))))
+ )
 
 (add-to-list 'load-path "~/.emacs-lib")
-(add-to-list 'load-path "~/.emacs-lib/yasnippet-0.6.1c")
 
 ;; Tabs, I hate you. Get out.
 (setq-default indent-tabs-mode nil)
@@ -21,9 +21,9 @@
 (scroll-bar-mode 0)
 
 (setq-default scroll-step 1)   ; turn off jumpy scroll
-(setq-default visible-bell t)  ; no beeps, flash on errors
 (column-number-mode t)         ; display the column number on modeline
 (show-paren-mode t)            ; highlight parens
+
 
 ;; Insert mode is garbage.
 (global-set-key
@@ -85,15 +85,18 @@
 
 ;; Meta-left and right to switch buffers
 (global-set-key 
-  (read-kbd-macro "M-<left>") 'next-buffer)
+  (read-kbd-macro "s-<left>") 'next-buffer)
 (global-set-key 
-  (read-kbd-macro "M-<right>") 'previous-buffer)
+  (read-kbd-macro "s-<right>") 'previous-buffer)
 
 ;; Super-left and right to switch windows
-(global-set-key 
-  (read-kbd-macro "s-<left>") 'previous-multiframe-window)
-(global-set-key 
-  (read-kbd-macro "s-<right>") 'next-multiframe-window)
+;; (global-set-key 
+;;   (read-kbd-macro "s-<left>") 'previous-multiframe-window)
+;; (global-set-key 
+;;   (read-kbd-macro "s-<right>") 'next-multiframe-window)
+
+;; Move around split buffers using meta key and arrows
+(windmove-default-keybindings 'meta)
 
 (global-set-key 
   (read-kbd-macro "s-k") 'kill-this-buffer)
@@ -142,14 +145,37 @@
 ;; Automagically tab new lines
 (global-set-key (kbd "RET") 'reindent-then-newline-and-indent)
 
+
+;; yasnippet
+(add-to-list 'load-path "~/.emacs-lib/yasnippet-0.6.1c")
+(require 'yasnippet)
+(yas/initialize)
+(yas/load-directory "~/.emacs-lib/yasnippet-0.6.1c/snippets")
+
+
 ;;
 ;; Mac only stuff
 ;;
-(when (string= "Darwin\n" (shell-command-to-string "uname"))
+(when (string= "ingot\n" (shell-command-to-string "hostname"))
   ;; C-Backslash is delete.
   (global-set-key (read-kbd-macro "C-\\") 'delete-char)
 
   ;; Apple wants a bigger font for some reason
   (set-face-attribute 'default nil
                       :height 160)
+
+  (setq-default visible-bell t)
+  )
+
+
+;;
+;; Work-only stuff
+;;
+(when (string= "client8136\n" (shell-command-to-string "hostname"))
+  (if (eq 'x window-system)
+      (setq default-frame-alist
+            '((top . 0) (left . 400)
+              (width . 96) (height . 63))
+            )
+    )
   )
