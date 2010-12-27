@@ -24,6 +24,8 @@
 (column-number-mode t)         ; display the column number on modeline
 (show-paren-mode t)            ; highlight parens
 
+;; STFU
+(setq ring-bell-function 'ignore)
 
 ;; Insert mode is garbage.
 (global-set-key
@@ -143,7 +145,12 @@
 (put 'narrow-to-region 'disabled nil)
 
 ;; Automagically tab new lines
-(global-set-key (kbd "RET") 'reindent-then-newline-and-indent)
+(global-set-key (kbd "RET") 'newline-and-indent)
+
+
+;; autopair braces () {} "" <> etc.
+(require 'autopair)
+(autopair-global-mode) ;; enable autopair in all buffers
 
 
 ;; yasnippet
@@ -164,7 +171,12 @@
   (set-face-attribute 'default nil
                       :height 160)
 
-  (setq-default visible-bell t)
+  (if (eq 'ns window-system)
+      (setq default-frame-alist
+            '((top . 0) (left . 40)
+              (width . 90) (height . 62))
+            )
+    )
   )
 
 
