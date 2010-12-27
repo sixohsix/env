@@ -86,9 +86,9 @@
 
 ;; Meta-left and right to switch buffers
 (global-set-key 
-  (read-kbd-macro "M-<left>") 'next-buffer)
+  (read-kbd-macro "s-<left>") 'next-buffer)
 (global-set-key 
-  (read-kbd-macro "M-<right>") 'previous-buffer)
+  (read-kbd-macro "s-<right>") 'previous-buffer)
 
 ;; Super-left and right to switch windows
 ;; (global-set-key 
