@@ -156,7 +156,7 @@
 ;;
 ;; Mac only stuff
 ;;
-(when (string= "ingot\n" (shell-command-to-string "hostname"))
+(when (string= "ingot.local\n" (shell-command-to-string "hostname"))
   ;; C-Backslash is delete.
   (global-set-key (read-kbd-macro "C-\\") 'delete-char)
 
