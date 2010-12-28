@@ -91,12 +91,6 @@
 (global-set-key 
   (read-kbd-macro "s-<right>") 'previous-buffer)
 
-;; Super-left and right to switch windows
-;; (global-set-key 
-;;   (read-kbd-macro "s-<left>") 'previous-multiframe-window)
-;; (global-set-key 
-;;   (read-kbd-macro "s-<right>") 'next-multiframe-window)
-
 ;; Move around split buffers using meta key and arrows
 (windmove-default-keybindings 'meta)
 
@@ -154,10 +148,10 @@
 
 
 ;; yasnippet
-(add-to-list 'load-path "~/.emacs-lib/yasnippet-0.6.1c")
-(require 'yasnippet)
-(yas/initialize)
-(yas/load-directory "~/.emacs-lib/yasnippet-0.6.1c/snippets")
+;;(add-to-list 'load-path "~/.emacs-lib/yasnippet-0.6.1c")
+;;(require 'yasnippet)
+;;(yas/initialize)
+;;(yas/load-directory "~/.emacs-lib/yasnippet-0.6.1c/snippets")
 
 
 ;;
