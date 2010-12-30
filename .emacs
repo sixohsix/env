@@ -96,6 +96,8 @@
 
 (global-set-key 
   (read-kbd-macro "s-k") 'kill-this-buffer)
+(global-set-key 
+  (read-kbd-macro "s-R") 'rename-buffer)
 
 
 (defvar iresize-mode-map 
@@ -121,6 +123,11 @@
 (require 'color-theme)
 (load-library "color-theme-monokai_dark")
 (color-theme-monokai_dark)
+
+;; Make terminal colors look good against black
+(setq ansi-term-color-vector
+      [unspecified "#000000" "#963F3C" "#5FFB65" "#FFFD65"
+                   "#0082FF" "#FF2180" "#57DCDB" "#FFFFFF"])
 
 ;; Set up pymacs: emacs-python integration
 ;;(autoload 'pymacs-apply "pymacs")
