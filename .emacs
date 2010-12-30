@@ -70,8 +70,6 @@
   (read-kbd-macro "C-x p") "import pdb; pdb.set_trace() # --miv DEBUG")
 (global-set-key 
   (read-kbd-macro "C-x P") "<?python\n  import pdb; pdb.set_trace() # --miv DEBUG\n ?>\n")
-(global-set-key
-  (read-kbd-macro "s-q") 'buffer-menu)
 
 ;; Use F5 or Super-R to refresh a file.
 (defun really-refresh-file ()
@@ -101,6 +99,13 @@
 (global-set-key 
   (read-kbd-macro "s-R") 'rename-buffer)
 
+(defun run-bash ()
+  (interactive)
+  (term "/bin/bash")
+  (rename-uniquely)
+  )
+(global-set-key 
+  (read-kbd-macro "s-t") 'run-bash)
 
 (defvar iresize-mode-map 
   (let ((m (make-sparse-keymap)))
