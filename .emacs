@@ -17,8 +17,10 @@
 ;; No Bullshit mode.
 (setq inhibit-splash-screen t)
 (menu-bar-mode 0)
-(tool-bar-mode 0)
-(scroll-bar-mode 0)
+(when (fboundp 'tool-bar-mode)
+  (tool-bar-mode 0)
+  (scroll-bar-mode 0)
+  )
 
 (setq-default scroll-step 1)   ; turn off jumpy scroll
 (column-number-mode t)         ; display the column number on modeline
