@@ -148,6 +148,7 @@
 (require 'autopair)
 (autopair-global-mode) ;; enable autopair in all buffers
 
+(require 'miv-mark-zoom)
 
 ;; yasnippet
 ;;(add-to-list 'load-path "~/.emacs-lib/yasnippet-0.6.1c")
