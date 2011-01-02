@@ -22,3 +22,5 @@
 	(font-lock-builtin-face ((t (:foreground "#A6E22E"))))
 	(font-lock-function-name-face ((t (:foreground "#A6E22E"))))
 )))
+
+(setq term-default-fg-color "#8C8C8C")
