@@ -162,6 +162,12 @@
 
 (require 'miv-mark-zoom)
 
+(require 'abl)
+(setq expected-projects-base-path "/home/%s/projects")
+(setq vem-command "vem_activate")
+(setq nose-command "nosetests -s")
+
+
 ;; yasnippet
 ;;(add-to-list 'load-path "~/.emacs-lib/yasnippet-0.6.1c")
 ;;(require 'yasnippet)
