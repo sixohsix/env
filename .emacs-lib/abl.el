@@ -175,20 +175,19 @@ followed by a proper class name).")
 
 
 (defun get-test-file-path ()
-  (if (or
-       (not (index-of ".py" (buffer-file-name)))
-       (/= (index-of ".py" (buffer-file-name)) (- (length (buffer-file-name)) 3)))
-      (error "You do not appear to be in a python file. Now open a python file!"))
-  (let* ((buffer-name (buffer-file-name))
-	 (relative-path (substring buffer-name (+ (index-of current-abl-branch buffer-name)
-						  (length current-abl-branch) 1)
-				   (- (length buffer-name) 3))))
-    (replace-regexp-in-string "/" "." relative-path)))
+  (let ((buffer-name (buffer-file-name)))
+    (if (not (ends-with buffer-name ".py"))
+	(error "You do not appear to be in a python file. Now open a python file!"))
+    (let ((relative-path (substring
+			  buffer-name
+			  (+ (index-of current-abl-branch buffer-name)
+			     (length current-abl-branch) 1)
+			  (- (length buffer-name) 3))))
+      (replace-regexp-in-string "/" "." relative-path))))
 
 
-(defun get-test-function-path ()
-  (let* ((function-name (determine-test-function-name))
-	 (file-path (get-test-file-path)))
+(defun get-test-function-path (file-path)
+  (let ((function-name (determine-test-function-name)))
     (if (not (test-in-class))
 	(concat file-path ":" function-name)
       (let ((class-name (determine-test-class-name)))
@@ -197,18 +196,37 @@ followed by a proper class name).")
 
 (defun run-test (test-path &optional branch-name)
   (let ((shell-command (concat nose-command " " test-path))
-	(real-branch-name (if (not branch-name) (find-current-branch-name) branch-name)))
+	(real-branch-name (or branch-name (find-current-branch-name))))
     (message (concat "Running test: " test-path))
-    (run-shell-command-for-branch shell-command real-branch-name)))
+    (run-shell-command-for-branch shell-command real-branch-name)
+    (setq last-test-run (cons test-path (find-current-branch-name)))))
 
+
+;This returns the python destination on point, depending on
+;whether it is a test function, class, or whole file
+(defun get-test-entity ()
+  (let ((file-path (get-test-file-path)))
+    (if (= (line-number-at-pos) 1)
+	file-path
+      (let* ((test-func-pos
+	      (save-excursion
+		(re-search-backward "^ *def test*" nil t)))
+	     (test-class-pos
+	      (save-excursion
+		(re-search-backward "^class *" nil t))))
+	(cond
+	 ((not (or test-func-pos test-class-pos))
+	  (error "You are neither in a test class nor a test function."))
+	 (test-func-pos (if (or (not test-class-pos)
+				(< test-class-pos test-func-pos))
+			    (get-test-function-path file-path)))
+	 (test-class-pos (concat file-path ":" (determine-test-class-name))))))))
 
 (defun run-test-at-point ()
   (interactive)
-  (let* ((test-path (get-test-function-path))
-	 (shell-command (concat nose-command " " test-path)))
+  (let* ((test-path (get-test-entity)))
     (message (concat "Running test: " test-path))
-    (run-command-for-current-abl-branch shell-command)
-    (setq last-test-run (cons test-path (find-current-branch-name)))))
+    (run-test test-path)))
 
 (defun rerun-last-test ()
   (interactive)
@@ -223,8 +241,14 @@ followed by a proper class name).")
 ;;IMPORTANT TODOS;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
+;; - If the cursor is at a class line when run-test is called, run the
+;;   class. If it is at the beginning, run the whole file
+;;
 ;; - Shell processes should be able to handle errors, and know when a
 ;;   shell buffer is occupied.
+;;
+;; - Check if a virtual env with the name of the branch exists; if not, ask the user for the name
+;;   of the virtual env
 ;;
 ;; - When the cursor is in an inner function inside a test, it should still run?
 ;;
@@ -234,7 +258,6 @@ followed by a proper class name).")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; - Fetch and parse the results of a test run
-;; - Autocompletion for open-python-path
 ;;
 ;; - Opening all the buffers in a different branch
 ;;
