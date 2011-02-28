@@ -173,11 +173,21 @@
 (setq nose-command "nosetests -s")
 
 
-;; yasnippet
-;;(add-to-list 'load-path "~/.emacs-lib/yasnippet-0.6.1c")
-;;(require 'yasnippet)
-;;(yas/initialize)
-;;(yas/load-directory "~/.emacs-lib/yasnippet-0.6.1c/snippets")
+;; use tab as autocomplete
+(defun indent-or-expand (arg)
+   "Either indent according to mode, or expand the word preceding point."
+   (interactive "*P")
+   (if (and
+        (or (bobp) (= ?w (char-syntax (char-before))))
+        (or (eobp) (not (= ?w (char-syntax (char-after))))))
+       (dabbrev-expand arg)
+     (indent-according-to-mode)))
+(defun my-tab-fix ()
+   (global-set-key [tab] 'indent-or-expand))
+(add-hook 'c-mode-hook          'my-tab-fix)
+(add-hook 'sh-mode-hook         'my-tab-fix)
+(add-hook 'emacs-lisp-mode-hook 'my-tab-fix)
+(add-hook 'python-mode-hook 'my-tab-fix)
 
 
 ;;
