@@ -33,6 +33,8 @@
 (global-set-key
   (read-kbd-macro "<insert>") 'nil)
 
+;; Behave like a normal editor and delete region when you type
+(delete-selection-mode 1)
 
 ;; GTFO trailing spaces, who asked YOU to this party?!
 (defun ableton-trailing-ws-load ()
@@ -135,6 +137,8 @@
 (setq ansi-term-color-vector
       [unspecified "#000000" "#963F3C" "#5FFB65" "#FFFD65"
                    "#0082FF" "#FF2180" "#57DCDB" "#FFFFFF"])
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+(add-hook 'shell-mode-hook '(lambda () (toggle-truncate-lines 1)))
 
 ;; Set up pymacs: emacs-python integration
 ;;(autoload 'pymacs-apply "pymacs")
@@ -149,6 +153,7 @@
 
 (autoload 'js2-mode "js2" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(setq js2-mirror-mode nil)
 
 (put 'narrow-to-region 'disabled nil)
 
