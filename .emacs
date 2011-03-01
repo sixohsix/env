@@ -66,7 +66,10 @@
 (ido-mode t)
 
 (require 'column-marker)
-(add-hook 'python-mode-hook (lambda () (interactive) (column-marker-1 80)))
+(add-hook 'python-mode-hook
+          (lambda () (interactive)
+            (column-marker-1 80)
+            (smart-tab-mode 1)))
 
 (global-set-key 
   (read-kbd-macro "C-x p") "import pdb; pdb.set_trace() # --miv DEBUG")
@@ -172,22 +175,7 @@
 (setq vem-command "vem_activate")
 (setq nose-command "nosetests -s")
 
-
-;; use tab as autocomplete
-(defun indent-or-expand (arg)
-   "Either indent according to mode, or expand the word preceding point."
-   (interactive "*P")
-   (if (and
-        (or (bobp) (= ?w (char-syntax (char-before))))
-        (or (eobp) (not (= ?w (char-syntax (char-after))))))
-       (dabbrev-expand arg)
-     (indent-according-to-mode)))
-(defun my-tab-fix ()
-   (global-set-key [tab] 'indent-or-expand))
-(add-hook 'c-mode-hook          'my-tab-fix)
-(add-hook 'sh-mode-hook         'my-tab-fix)
-(add-hook 'emacs-lisp-mode-hook 'my-tab-fix)
-(add-hook 'python-mode-hook 'my-tab-fix)
+(require 'smart-tab)
 
 
 ;;
