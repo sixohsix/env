@@ -1,7 +1,20 @@
 [user]
 	name = Mike Verdone
 	email = mike.verdone@gmail.com
+[alias]
+        b = branch
+        bd = branch -d
+        ba = branch -avv
+        c = commit -am
+        co = checkout
+        d = diff
+        l = log
+        lt = log --oneline --graph
+        s = status -sb
 [color]
-	status = true
-[advice]
-	statusHints = false
+        diff = auto
+        status = auto
+        branch = auto
+        interactive = auto
+        ui = auto
+        pager = true
