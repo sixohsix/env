@@ -3,7 +3,7 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(default ((t (:stipple nil :background "black" :foreground "SlateGray4" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 122 :width normal :foundry "unknown" :family "Inconsolata"))))
+ '(default ((t (:stipple nil :background "black" :foreground "SlateGray4" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "unknown" :family "Inconsolata"))))
  '(cursor ((t (:background "orange"))))
  '(mode-line ((t (:background "CornflowerBlue" :foreground "#101010" :box (:line-width -1 :color "SlateGray3")))))
  '(mode-line-inactive ((t (:inherit mode-line :background "NavyBlue" :foreground "CornflowerBlue" :box -1 :weight light))))
@@ -134,13 +134,16 @@
 
 
 (require 'color-theme)
-(load-library "color-theme-monokai_dark")
-(color-theme-monokai_dark)
+;;(load-library "color-theme-monokai_dark")
+;;(color-theme-monokai_dark)
+(load-library "color-theme-wombat")
+(color-theme-wombat)
 
 ;; Make terminal colors look good against black
 (setq ansi-term-color-vector
       [unspecified "#000000" "#963F3C" "#5FFB65" "#FFFD65"
                    "#0082FF" "#FF2180" "#57DCDB" "#FFFFFF"])
+(setq-default comint-prompt-read-only t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 (add-hook 'shell-mode-hook '(lambda () (toggle-truncate-lines 1)))
 
@@ -209,4 +212,6 @@
               (width . 96) (height . 63))
             )
     )
+
+  (server-start)
   )
