@@ -10,6 +10,8 @@
         d = diff
         l = log
         lt = log --oneline --graph
+        p = pull
+        pp = push -u origin HEAD
         s = status -sb
 [color]
         diff = auto
