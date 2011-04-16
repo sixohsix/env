@@ -79,3 +79,5 @@ vemfresh3.2() {
 
 [ -d ~/bin ] \
     && export PATH=~/bin:$PATH
+
+[ -e .pystartup ] && export PYTHONSTARTUP=~/.pystartup
