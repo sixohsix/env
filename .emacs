@@ -178,6 +178,9 @@
 (require 'abl)
 (setq expected-projects-base-path "/home/%s/projects")
 (setq vem-command "vem_activate")
+(setq vems-base-dir "~/.virtualenvs2.5")
+(setq nose-command "nosetests -vs")
+(add-hook 'find-file-hooks 'abl-mode-hook)
 
 (require 'smart-tab)
 
@@ -208,10 +211,11 @@
 (when (string= "client8136\n" (shell-command-to-string "hostname"))
   (if (eq 'x window-system)
       (setq default-frame-alist
-            '((top . 0) (left . 400)
+            '((top . 0) (left . 500)
               (width . 145) (height . 64))
             )
     )
-
+  (add-to-list 'load-path "~/projects/extended_abl_mode")
+  (require 'extended-abl)
   (server-start)
   )
