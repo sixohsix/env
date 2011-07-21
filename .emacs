@@ -176,8 +176,8 @@
 (require 'miv-mark-zoom)
 
 (require 'abl)
+(setq expected-projects-base-path "/home/%s/projects")
 (setq vem-command "vem_activate")
-;; (setq nose-command "nosetests -s")
 
 (require 'smart-tab)
 
