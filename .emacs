@@ -23,12 +23,11 @@
   (scroll-bar-mode 0)
   )
 
-(setq-default scroll-step 1)   ; turn off jumpy scroll
-(column-number-mode t)         ; display the column number on modeline
-(show-paren-mode t)            ; highlight parens
-
-;; STFU
-(setq ring-bell-function 'ignore)
+(setq-default scroll-step 1)      ; turn off jumpy scroll
+(column-number-mode t)            ; display the column number on modeline
+(show-paren-mode t)               ; highlight parens
+(setq pop-up-windows nil)         ; pop-up windows GTFO
+(setq ring-bell-function 'ignore) ; beeping noise: STFU!!
 
 ;; Insert mode is garbage.
 (global-set-key
@@ -107,7 +106,7 @@
 
 (defun run-bash ()
   (interactive)
-  (term "/bin/bash")
+  (shell "/bin/bash")
   (rename-uniquely)
   )
 (global-set-key 
@@ -136,8 +135,10 @@
 (require 'color-theme)
 ;;(load-library "color-theme-monokai_dark")
 ;;(color-theme-monokai_dark)
-(load-library "color-theme-wombat")
-(color-theme-wombat)
+;;(load-library "color-theme-wombat")
+;;(color-theme-wombat)
+(load-library "color-theme-solarize-1")
+(color-theme-solarize-1)
 
 ;; Make terminal colors look good against black
 (setq ansi-term-color-vector
@@ -175,9 +176,8 @@
 (require 'miv-mark-zoom)
 
 (require 'abl)
-(setq expected-projects-base-path "/home/%s/projects")
 (setq vem-command "vem_activate")
-(setq nose-command "nosetests -s")
+;; (setq nose-command "nosetests -s")
 
 (require 'smart-tab)
 
@@ -209,7 +209,7 @@
   (if (eq 'x window-system)
       (setq default-frame-alist
             '((top . 0) (left . 400)
-              (width . 96) (height . 63))
+              (width . 145) (height . 64))
             )
     )
 
