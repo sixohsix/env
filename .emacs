@@ -135,10 +135,10 @@
 (require 'color-theme)
 ;;(load-library "color-theme-monokai_dark")
 ;;(color-theme-monokai_dark)
-;;(load-library "color-theme-wombat")
-;;(color-theme-wombat)
-(load-library "color-theme-solarize-1")
-(color-theme-solarize-1)
+(load-library "color-theme-wombat")
+(color-theme-wombat)
+;;(load-library "color-theme-solarize-1")
+;;(color-theme-solarize-1)
 
 ;; Make terminal colors look good against black
 (setq ansi-term-color-vector
@@ -148,20 +148,12 @@
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 (add-hook 'shell-mode-hook '(lambda () (toggle-truncate-lines 1)))
 
-;; Set up pymacs: emacs-python integration
-;;(autoload 'pymacs-apply "pymacs")
-;;(autoload 'pymacs-call "pymacs")
-;;(autoload 'pymacs-eval "pymacs" nil t)
-;;(autoload 'pymacs-exec "pymacs" nil t)
-;;(autoload 'pymacs-load "pymacs" nil t)
-;;(eval-after-load "pymacs"
-;;  '(add-to-list 'pymacs-load-path ".emacs-lib/python"))
-
 (require 'magit)
 
-(autoload 'js2-mode "js2" nil t)
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(require 'js2-mode)
+(setq js2-consistent-level-indent-inner-bracket-p 'true)
 (setq js2-mirror-mode nil)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
 (put 'narrow-to-region 'disabled nil)
 
@@ -183,7 +175,12 @@
 (add-hook 'find-file-hooks 'abl-mode-hook)
 
 (require 'smart-tab)
-
+(require 'coffee-mode)
+(defun coffee-custom ()
+  "coffee-mode-hook"
+ (set (make-local-variable 'tab-width) 2))
+(add-hook 'coffee-mode-hook
+  '(lambda() (coffee-custom)))
 
 ;;
 ;; Mac only stuff
