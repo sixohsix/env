@@ -100,7 +100,7 @@
 (windmove-default-keybindings 'meta)
 
 (global-set-key 
-  (read-kbd-macro "s-k") 'kill-this-buffer)
+  (read-kbd-macro "C-x k") 'kill-this-buffer)
 (global-set-key 
   (read-kbd-macro "s-R") 'rename-buffer)
 
