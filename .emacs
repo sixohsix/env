@@ -3,13 +3,14 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(default ((t (:stipple nil :background "black" :foreground "SlateGray4" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 122 :width normal :foundry "unknown" :family "Inconsolata"))))
+ '(default ((t (:stipple nil :background "black" :foreground "SlateGray4" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "unknown" :family "Inconsolata"))))
  '(cursor ((t (:background "orange"))))
  '(mode-line ((t (:background "CornflowerBlue" :foreground "#101010" :box (:line-width -1 :color "SlateGray3")))))
  '(mode-line-inactive ((t (:inherit mode-line :background "NavyBlue" :foreground "CornflowerBlue" :box -1 :weight light))))
  )
 
 (add-to-list 'load-path "~/.emacs-lib")
+(add-to-list 'load-path "~/.emacs-lib/abl-mode")
 
 ;; Tabs, I hate you. Get out.
 (setq-default indent-tabs-mode nil)
@@ -22,17 +23,18 @@
   (scroll-bar-mode 0)
   )
 
-(setq-default scroll-step 1)   ; turn off jumpy scroll
-(column-number-mode t)         ; display the column number on modeline
-(show-paren-mode t)            ; highlight parens
-
-;; STFU
-(setq ring-bell-function 'ignore)
+(setq-default scroll-step 1)      ; turn off jumpy scroll
+(column-number-mode t)            ; display the column number on modeline
+(show-paren-mode t)               ; highlight parens
+(setq pop-up-windows nil)         ; pop-up windows GTFO
+(setq ring-bell-function 'ignore) ; beeping noise: STFU!!
 
 ;; Insert mode is garbage.
 (global-set-key
   (read-kbd-macro "<insert>") 'nil)
 
+;; Behave like a normal editor and delete region when you type
+(delete-selection-mode 1)
 
 ;; GTFO trailing spaces, who asked YOU to this party?!
 (defun ableton-trailing-ws-load ()
@@ -64,7 +66,10 @@
 (ido-mode t)
 
 (require 'column-marker)
-(add-hook 'python-mode-hook (lambda () (interactive) (column-marker-1 80)))
+(add-hook 'python-mode-hook
+          (lambda () (interactive)
+            (column-marker-1 80)
+            (smart-tab-mode 1)))
 
 (global-set-key 
   (read-kbd-macro "C-x p") "import pdb; pdb.set_trace() # --miv DEBUG")
@@ -101,7 +106,7 @@
 
 (defun run-bash ()
   (interactive)
-  (term "/bin/bash")
+  (shell "/bin/bash")
   (rename-uniquely)
   )
 (global-set-key 
@@ -128,26 +133,26 @@
 
 
 (require 'color-theme)
-(load-library "color-theme-monokai_dark")
-(color-theme-monokai_dark)
+;;(load-library "color-theme-monokai_dark")
+;;(color-theme-monokai_dark)
+(load-library "color-theme-wombat")
+(color-theme-wombat)
+;;(load-library "color-theme-solarize-1")
+;;(color-theme-solarize-1)
 
 ;; Make terminal colors look good against black
 (setq ansi-term-color-vector
       [unspecified "#000000" "#963F3C" "#5FFB65" "#FFFD65"
                    "#0082FF" "#FF2180" "#57DCDB" "#FFFFFF"])
-
-;; Set up pymacs: emacs-python integration
-;;(autoload 'pymacs-apply "pymacs")
-;;(autoload 'pymacs-call "pymacs")
-;;(autoload 'pymacs-eval "pymacs" nil t)
-;;(autoload 'pymacs-exec "pymacs" nil t)
-;;(autoload 'pymacs-load "pymacs" nil t)
-;;(eval-after-load "pymacs"
-;;  '(add-to-list 'pymacs-load-path ".emacs-lib/python"))
+(setq-default comint-prompt-read-only t)
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+(add-hook 'shell-mode-hook '(lambda () (toggle-truncate-lines 1)))
 
 (require 'magit)
 
-(autoload 'js2-mode "js2" nil t)
+(require 'js2-mode)
+(setq js2-consistent-level-indent-inner-bracket-p 'true)
+(setq js2-mirror-mode nil)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
 (put 'narrow-to-region 'disabled nil)
@@ -162,18 +167,20 @@
 
 (require 'miv-mark-zoom)
 
-;;(require 'abl)
+(require 'abl)
 (setq expected-projects-base-path "/home/%s/projects")
 (setq vem-command "vem_activate")
-(setq nose-command "nosetests -s")
+(setq vems-base-dir "~/.virtualenvs2.5")
+(setq nose-command "nosetests -vs")
+(add-hook 'find-file-hooks 'abl-mode-hook)
 
-
-;; yasnippet
-;;(add-to-list 'load-path "~/.emacs-lib/yasnippet-0.6.1c")
-;;(require 'yasnippet)
-;;(yas/initialize)
-;;(yas/load-directory "~/.emacs-lib/yasnippet-0.6.1c/snippets")
-
+(require 'smart-tab)
+(require 'coffee-mode)
+(defun coffee-custom ()
+  "coffee-mode-hook"
+ (set (make-local-variable 'tab-width) 2))
+(add-hook 'coffee-mode-hook
+  '(lambda() (coffee-custom)))
 
 ;;
 ;; Mac only stuff
@@ -201,8 +208,11 @@
 (when (string= "client8136\n" (shell-command-to-string "hostname"))
   (if (eq 'x window-system)
       (setq default-frame-alist
-            '((top . 0) (left . 400)
-              (width . 96) (height . 63))
+            '((top . 0) (left . 500)
+              (width . 145) (height . 64))
             )
     )
+  (add-to-list 'load-path "~/projects/extended_abl_mode")
+  (require 'extended-abl)
+  (server-start)
   )

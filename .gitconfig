@@ -1,15 +1,19 @@
 [user]
-	name = Mike Verdone
-	email = mike.verdone@gmail.com
+	name = miv
+	email = mike.verdone@ableton.com
 [alias]
         b = branch
+        bb = branch -avv
         bd = branch -d
-        ba = branch -avv
+        bnuke = !git branch -d $1 ; git push --delete origin $1
         c = commit -am
+        ce = commit -ae
         co = checkout
         d = diff
+        f = fetch
         l = log
         lt = log --oneline --graph
+        lf = log --name-status
         p = pull
         pp = push -u origin HEAD
         s = status -sb
