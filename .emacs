@@ -147,7 +147,7 @@
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 (add-hook 'shell-mode-hook '(lambda () (toggle-truncate-lines 1)))
 
-(require 'magit)
+;;(require 'magit)
 
 (require 'js2-mode)
 (setq js2-consistent-level-indent-inner-bracket-p 'true)
