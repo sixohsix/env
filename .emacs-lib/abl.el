@@ -4,6 +4,8 @@
 ;; such as running tests and bits of code easier. It takes the
 ;; organization of code in a certain way as granted.
 
+(require 'cl)
+
 ;; <<--------- The necessary minor-mode stuff  ---------->>
 
 (defvar abl-mode nil

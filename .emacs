@@ -10,7 +10,6 @@
  )
 
 (add-to-list 'load-path "~/.emacs-lib")
-(add-to-list 'load-path "~/.emacs-lib/abl-mode")
 
 ;; Tabs, I hate you. Get out.
 (setq-default indent-tabs-mode nil)
