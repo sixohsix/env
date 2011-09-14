@@ -1,6 +1,5 @@
 
 (add-to-list 'load-path "~/.emacs-lib")
-(add-to-list 'load-path "~/.emacs-lib/abl-mode")
 
 ;; Tabs, I hate you. Get out.
 (setq-default indent-tabs-mode nil)
@@ -85,7 +84,7 @@
 (windmove-default-keybindings 'meta)
 
 (global-set-key 
-  (read-kbd-macro "s-k") 'kill-this-buffer)
+  (read-kbd-macro "C-x k") 'kill-this-buffer)
 (global-set-key 
   (read-kbd-macro "s-R") 'rename-buffer)
 
