@@ -1,13 +1,3 @@
-(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(default ((t (:stipple nil :background "black" :foreground "SlateGray4" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "unknown" :family "Inconsolata"))))
- '(cursor ((t (:background "orange"))))
- '(mode-line ((t (:background "CornflowerBlue" :foreground "#101010" :box (:line-width -1 :color "SlateGray3")))))
- '(mode-line-inactive ((t (:inherit mode-line :background "NavyBlue" :foreground "CornflowerBlue" :box -1 :weight light))))
- )
 
 (add-to-list 'load-path "~/.emacs-lib")
 (add-to-list 'load-path "~/.emacs-lib/abl-mode")
@@ -17,11 +7,6 @@
 
 ;; No Bullshit mode.
 (setq inhibit-splash-screen t)
-(menu-bar-mode 0)
-(when (fboundp 'tool-bar-mode)
-  (tool-bar-mode 0)
-  (scroll-bar-mode 0)
-  )
 
 (setq-default scroll-step 1)      ; turn off jumpy scroll
 (column-number-mode t)            ; display the column number on modeline
@@ -133,12 +118,8 @@
 
 
 (require 'color-theme)
-;;(load-library "color-theme-monokai_dark")
-;;(color-theme-monokai_dark)
-(load-library "color-theme-wombat")
+(color-theme-initialize)
 (color-theme-wombat)
-;;(load-library "color-theme-solarize-1")
-;;(color-theme-solarize-1)
 
 ;; Make terminal colors look good against black
 (setq ansi-term-color-vector
@@ -147,8 +128,6 @@
 (setq-default comint-prompt-read-only t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 (add-hook 'shell-mode-hook '(lambda () (toggle-truncate-lines 1)))
-
-(require 'magit)
 
 (require 'js2-mode)
 (setq js2-consistent-level-indent-inner-bracket-p 'true)
@@ -186,6 +165,13 @@
 ;; Mac only stuff
 ;;
 (when (string= "ingot.local\n" (shell-command-to-string "hostname"))
+  
+  (menu-bar-mode 0)
+  (when (fboundp 'tool-bar-mode)
+    (tool-bar-mode 0)
+    (scroll-bar-mode 0)
+    )
+  
   ;; C-Backslash is delete.
   (global-set-key (read-kbd-macro "C-\\") 'delete-char)
 
@@ -206,12 +192,12 @@
 ;; Work-only stuff
 ;;
 (when (string= "client8136\n" (shell-command-to-string "hostname"))
-  (if (eq 'x window-system)
-      (setq default-frame-alist
-            '((top . 0) (left . 500)
-              (width . 145) (height . 64))
-            )
-    )
+;;  (if (eq 'x window-system)
+      ;;(setq default-frame-alist
+      ;;      '((top . 0) (left . 500)
+      ;;        (width . 145) (height . 64))
+      ;;      )
+;;    )
   (add-to-list 'load-path "~/projects/extended_abl_mode")
   (require 'extended-abl)
   (server-start)
