@@ -1,0 +1,33 @@
+#!/bin/bash
+
+xrdb -merge .Xresources
+xmodmap ~/.xmodmap
+
+#gnome-settings-daemon
+/usr/lib/gnome-session/helpers/gnome-settings-daemon-helper
+gnome-screensaver
+syndaemon -d -t
+#xsetroot -solid "#636161"
+#feh --bg-scale /home/mlp/Pictures/fantasy_art_scenery_wallpaper_sven_sauer_03.jpg &
+#feh --bg-scale /home/mlp/Pictures/fantasy_art_scenery_wallpaper_sergey_musin_01.jpg &
+
+# This must be started before seahorse-daemon.
+eval $(gnome-keyring-daemon)
+export GNOME-KEYRING-SOCKET
+export GNOME-KEYRING-PID
+
+# This is all the stuff I found in "Startup Applications".
+/usr/lib/gnome-session/helpers/at-spi-registryd-wrapper &
+bluetooth-applet &
+sh -c 'test -e /var/cache/jockey/check || exec jockey-gtk --check 60' &
+#sh -c "sleep 60 && python /usr/share/gnome-panel/add-indicator-applet.py" &
+nm-applet --sm-disable &
+#sh -c "sleep 1 && gnome-power-manager" &
+#sh -c "sleep 31 && system-config-printer-applet > /dev/null 2> /dev/null" &
+seahorse-daemon
+update-notifier --startup-delay=60 &
+xdg-user-dirs-gtk-update
+
+#xcompmgr -c -f -D3 &
+
+exec xmonad

@@ -88,14 +88,6 @@
 (global-set-key 
   (read-kbd-macro "s-R") 'rename-buffer)
 
-(defun run-bash ()
-  (interactive)
-  (shell "/bin/bash")
-  (rename-uniquely)
-  )
-(global-set-key 
-  (read-kbd-macro "s-t") 'run-bash)
-
 (defvar iresize-mode-map 
   (let ((m (make-sparse-keymap)))
     (define-key m (kbd "p") 'enlarge-window)
@@ -191,12 +183,6 @@
 ;; Work-only stuff
 ;;
 (when (string= "client8136\n" (shell-command-to-string "hostname"))
-;;  (if (eq 'x window-system)
-      ;;(setq default-frame-alist
-      ;;      '((top . 0) (left . 500)
-      ;;        (width . 145) (height . 64))
-      ;;      )
-;;    )
   (add-to-list 'load-path "~/projects/extended_abl_mode")
   (require 'extended-abl)
   (server-start)

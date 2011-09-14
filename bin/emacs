@@ -1,9 +1,9 @@
 #!/bin/sh
 if [[ 'Darwin' == `uname` && -e /Applications/Emacs.app/ ]]
 then
-  _emacs=/Applications/Emacs.app/Contents/MacOS/Emacs
+  _emacs=/Applications/Emacs.app/Contents/MacOS/Emacs -nw
   TERM=xterm-256color
 else
-  _emacs=`which emacs`
+  _emacs=/usr/bin/emacs
 fi
-$_emacs -nw $@
+$_emacs $@
