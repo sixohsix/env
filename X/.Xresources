@@ -4,7 +4,6 @@ Emacs.menuBar: off
 Emacs.toolBar: -1
 Emacs.verticalScrollBars: off
 
-URxvt*background: rgb:0000/0000/0000
 URxvt*color0: #000000
 URxvt*color10: #c5f779
 URxvt*color11: #fff796
@@ -24,8 +23,14 @@ URxvt*color9: #cf6171
 URxvt*colorUL: #c5f779
 URxvt*cursorColor: magenta
 URxvt.depth: 32
-URxvt*font: xft:Inconsolata:size=12:antialias=true
-URxvt*foreground: Wheat
 URxvt*internalBorder: 4
 URxvt.scrollBar: false
 URxvt*underlineColor: #c5f779
+
+URxvt*background: #2B2B2B
+URxvt*foreground: #EEEEEE
+URxvt*font: xft:Monospace:pixelsize=13
+URxvt*boldFont: xft:Monospace:bold:pixelsize=13
+URxvt*saveLines: 16000
+URxvt*scrollBar: false
+URxvt*scrollstyle: rxvt

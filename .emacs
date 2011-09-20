@@ -86,6 +86,8 @@
 (global-set-key 
   (read-kbd-macro "C-x k") 'kill-this-buffer)
 (global-set-key 
+  (read-kbd-macro "C-K") 'kill-this-buffer)
+(global-set-key 
   (read-kbd-macro "s-R") 'rename-buffer)
 
 (defvar iresize-mode-map 
@@ -139,7 +141,7 @@
 
 (require 'abl)
 (setq expected-projects-base-path "/home/%s/projects")
-(setq vem-command "vem_activate")
+(setq vem-activate-command "vem_activate %s")
 (setq vems-base-dir "~/.virtualenvs2.5")
 (setq nose-command "nosetests -vs")
 (add-hook 'find-file-hooks 'abl-mode-hook)

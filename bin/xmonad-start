@@ -5,7 +5,7 @@ xmodmap ~/.xmodmap
 
 #gnome-settings-daemon
 /usr/lib/gnome-session/helpers/gnome-settings-daemon-helper
-gnome-screensaver
+#gnome-screensaver
 syndaemon -d -t
 #xsetroot -solid "#636161"
 #feh --bg-scale /home/mlp/Pictures/fantasy_art_scenery_wallpaper_sven_sauer_03.jpg &
@@ -29,5 +29,7 @@ update-notifier --startup-delay=60 &
 xdg-user-dirs-gtk-update
 
 #xcompmgr -c -f -D3 &
+
+xscreensaver -no-splash &
 
 exec xmonad
