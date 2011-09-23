@@ -86,7 +86,7 @@
 (global-set-key 
   (read-kbd-macro "C-x k") 'kill-this-buffer)
 (global-set-key 
-  (read-kbd-macro "C-K") 'kill-this-buffer)
+  (read-kbd-macro "C-S-k") 'kill-this-buffer)
 (global-set-key 
   (read-kbd-macro "s-R") 'rename-buffer)
 
