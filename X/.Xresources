@@ -31,6 +31,6 @@ URxvt*background: #2B2B2B
 URxvt*foreground: #EEEEEE
 URxvt*font: xft:Monospace:pixelsize=13
 URxvt*boldFont: xft:Monospace:bold:pixelsize=13
-URxvt*saveLines: 16000
+URxvt*saveLines: 4000
 URxvt*scrollBar: false
 URxvt*scrollstyle: rxvt
