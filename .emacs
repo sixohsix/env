@@ -162,6 +162,25 @@
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
+
+;; Find python imports.
+(defun find-import ()
+  (interactive)
+  (let ((current (point)))
+    (re-search-backward "[\n \.\(\)\"\',]" nil t)
+    (forward-char)
+    (let* ((start (point))
+       (end (- (re-search-forward "[\n \.\(\)\"\',]" nil t) 1))
+       (entity (buffer-substring-no-properties start end))
+       (re (format "import \\(\\(\(\n?\\)[^\)]*\\)?\\(.*\\)?%s" entity)))
+      (goto-char (point-min))
+      (unless (re-search-forward re nil t)
+    (goto-char current)
+    (message "import could not be found")))))
+
+(define-key python-mode-map (kbd "C-c f") 'find-import)
+
+
 ;;
 ;; Mac only stuff
 ;;
