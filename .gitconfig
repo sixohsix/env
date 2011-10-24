@@ -1,15 +1,13 @@
-[user]
-	name = miv
-	email = mike.verdone@ableton.com
 [alias]
         b = branch
         bb = branch -avv
         bd = branch -d
-        bnuke = !git branch -d $1 ; git push --delete origin $1
+        bnuke = !git branch -d $1 && git push --delete origin
         c = commit -am
         ce = commit -ae
         co = checkout
         d = diff
+        df = diff --name-status
         f = fetch
         l = log
         lt = log --oneline --graph
@@ -17,6 +15,7 @@
         p = pull
         pp = push -u origin HEAD
         s = status -sb
+        setuser = ! git_setuser.py
 [color]
         diff = auto
         status = auto
