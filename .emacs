@@ -1,17 +1,14 @@
 
 (add-to-list 'load-path "~/.emacs-lib")
 
-;; Tabs, I hate you. Get out.
-(setq-default indent-tabs-mode nil)
-
-;; No Bullshit mode.
-(setq inhibit-splash-screen t)
-
-(setq-default scroll-step 1)      ; turn off jumpy scroll
-(column-number-mode t)            ; display the column number on modeline
-(show-paren-mode t)               ; highlight parens
-(setq pop-up-windows nil)         ; pop-up windows GTFO
-(setq ring-bell-function 'ignore) ; beeping noise: STFU!!
+(setq-default indent-tabs-mode nil) ; Tabs, I hate you. Get out.
+(setq inhibit-splash-screen t)      ; No Bullshit mode.
+(setq-default scroll-step 1)        ; turn off jumpy scroll
+(column-number-mode t)              ; display the column number on modeline
+(show-paren-mode t)                 ; highlight parens
+(setq pop-up-windows nil)           ; pop-up windows GTFO
+(setq ring-bell-function 'ignore)   ; beeping noise: STFU!!
+(setq show-trailing-whitespace t)   ; I hate trailing whitespace.
 
 ;; Insert mode is garbage.
 (global-set-key
@@ -20,25 +17,7 @@
 ;; Behave like a normal editor and delete region when you type
 (delete-selection-mode 1)
 
-;; GTFO trailing spaces, who asked YOU to this party?!
-(defun ableton-trailing-ws-load ()
-  (interactive)
-  (let (
-    (filename (buffer-file-name (current-buffer)))
-    )
-    (if (string-match ".*\\.py" filename)
-      (setq show-trailing-whitespace t)
-    )
-  )
-)
-(defun ableton-trailing-ws-save ()
-  (interactive)
-  (if show-trailing-whitespace
-    (delete-trailing-whitespace)
-  )
-)
-(add-hook 'find-file-hook 'ableton-trailing-ws-load)
-(add-hook 'before-save-hook 'ableton-trailing-ws-save)
+(global-set-key (read-kbd-macro "C-c c") 'delete-trailing-whitespace)
 
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'reverse)
@@ -52,45 +31,47 @@
 (require 'column-marker)
 (add-hook 'python-mode-hook
           (lambda () (interactive)
-            (column-marker-1 80)
             (smart-tab-mode 1)))
 
-(global-set-key 
-  (read-kbd-macro "C-x p") "import pdb; pdb.set_trace() # --miv DEBUG")
-(global-set-key 
-  (read-kbd-macro "C-x P") "<?python\n  import pdb; pdb.set_trace() # --miv DEBUG\n ?>\n")
+(add-hook 'find-file-hook
+          (lambda () (interactive)
+            (column-marker-1 80)))
 
-;; Use F5 or Super-R to refresh a file.
+(global-set-key
+  (read-kbd-macro "C-x p") "import pdb; pdb.set_trace() # --miv DEBUG")
+(global-set-key
+  (read-kbd-macro "C-x P")
+  "<?python\n  import pdb; pdb.set_trace() # --miv DEBUG\n ?>\n")
+
+;; Use F5 or C-S-r to refresh a file.
 (defun really-refresh-file ()
   (interactive)
   (revert-buffer t t t)
   )
 (global-set-key [f5] 'really-refresh-file)
-(global-set-key (read-kbd-macro "s-r") 'really-refresh-file)
+(global-set-key (read-kbd-macro "C-S-r") 'really-refresh-file)
 
 ;; Anti-fat-finger quit mode
-(global-set-key 
+(global-set-key
   (read-kbd-macro "C-x C-c") 'nil)
-(global-set-key 
+(global-set-key
   (read-kbd-macro "C-x C-c q q") 'kill-emacs)
 
 ;; Meta-left and right to switch buffers
-(global-set-key 
+(global-set-key
   (read-kbd-macro "s-<left>") 'next-buffer)
-(global-set-key 
+(global-set-key
   (read-kbd-macro "s-<right>") 'previous-buffer)
 
 ;; Move around split buffers using meta key and arrows
 (windmove-default-keybindings 'meta)
 
-(global-set-key 
-  (read-kbd-macro "C-x k") 'kill-this-buffer)
-(global-set-key 
+(global-set-key
   (read-kbd-macro "C-S-k") 'kill-this-buffer)
-(global-set-key 
+(global-set-key
   (read-kbd-macro "s-R") 'rename-buffer)
 
-(defvar iresize-mode-map 
+(defvar iresize-mode-map
   (let ((m (make-sparse-keymap)))
     (define-key m (kbd "p") 'enlarge-window)
     (define-key m (kbd "<up>") 'enlarge-window)
@@ -98,7 +79,7 @@
     (define-key m (kbd "<down>") 'shrink-window)
     (define-key m (kbd "C-c C-c") 'iresize-mode)
     (define-key m (kbd "<left>") 'shrink-window-horizontally)
-    (define-key m (kbd "<right>") 'enlarge-window-horizontally)    
+    (define-key m (kbd "<right>") 'enlarge-window-horizontally)
     m))
 (define-minor-mode iresize-mode
   :initial-value nil
@@ -106,7 +87,7 @@
   :keymap iresize-mode-map
   :group 'iresize)
 (provide 'iresize)
-(global-set-key 
+(global-set-key
   (read-kbd-macro "C-x t w") 'iresize-mode)
 
 
@@ -178,20 +159,28 @@
     (goto-char current)
     (message "import could not be found")))))
 
-(define-key python-mode-map (kbd "C-c f") 'find-import)
+;;(define-key 'python-mode-map (kbd "C-c f") 'find-import)
 
+
+(defun reorder-imports (&optional b e)
+  (interactive "r")
+  (push-mark)
+  (shell-command-on-region b e "reorder_imports" (current-buffer) 't)
+  (pop-mark)
+  )
+(global-set-key (read-kbd-macro "C-c i") 'reorder-imports)
 
 ;;
 ;; Mac only stuff
 ;;
 (when (string= "ingot.local\n" (shell-command-to-string "hostname"))
-  
+
   (menu-bar-mode 0)
   (when (fboundp 'tool-bar-mode)
     (tool-bar-mode 0)
     (scroll-bar-mode 0)
     )
-  
+
   ;; C-Backslash is delete.
   (global-set-key (read-kbd-macro "C-\\") 'delete-char)
 
