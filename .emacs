@@ -5,10 +5,11 @@
 (setq inhibit-splash-screen t)      ; No Bullshit mode.
 (setq-default scroll-step 1)        ; turn off jumpy scroll
 (column-number-mode t)              ; display the column number on modeline
-(show-paren-mode t)                 ; highlight parens
-(setq pop-up-windows nil)           ; pop-up windows GTFO
-(setq ring-bell-function 'ignore)   ; beeping noise: STFU!!
-(setq show-trailing-whitespace t)   ; I hate trailing whitespace.
+(show-paren-mode t)                         ; highlight parens
+(setq pop-up-windows nil)                   ; pop-up windows GTFO
+(setq ring-bell-function 'ignore)           ; beeping noise: STFU!!
+(setq-default show-trailing-whitespace t)   ; I hate trailing whitespace.
+(blink-cursor-mode (- (*) (*) (*)))         ; No blinking
 
 ;; Insert mode is garbage.
 (global-set-key
