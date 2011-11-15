@@ -18,8 +18,6 @@
 ;; Behave like a normal editor and delete region when you type
 (delete-selection-mode 1)
 
-(global-set-key (read-kbd-macro "C-c c") 'delete-trailing-whitespace)
-
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'reverse)
 (setq uniquify-separator "|")
@@ -35,14 +33,24 @@
             (smart-tab-mode 1)))
 
 (add-hook 'find-file-hook
-          (lambda () (interactive)
-            (column-marker-1 80)))
+          (lambda () (interactive) (column-marker-1 80)))
 
 (global-set-key
-  (read-kbd-macro "C-x p") "import pdb; pdb.set_trace() # --miv DEBUG")
+ (read-kbd-macro "C-x p") "import pdb; pdb.set_trace() # --miv DEBUG")
 (global-set-key
-  (read-kbd-macro "C-x P")
-  "<?python\n  import pdb; pdb.set_trace() # --miv DEBUG\n ?>\n")
+ (read-kbd-macro "C-x P")
+ "<?python\n  import pdb; pdb.set_trace() # --miv DEBUG\n ?>\n")
+(global-set-key (read-kbd-macro "C-S-s") 'rgrep)
+(global-set-key (read-kbd-macro "C-S-k") 'kill-this-buffer)
+(global-set-key (read-kbd-macro "C-c c") 'delete-trailing-whitespace)
+
+;; Anti-fat-finger quit mode
+(global-set-key (read-kbd-macro "C-x C-c") 'nil)
+(global-set-key (read-kbd-macro "C-x C-c q q") 'kill-emacs)
+
+;; Meta-left and right to switch buffers
+(global-set-key (read-kbd-macro "s-<left>") 'next-buffer)
+(global-set-key (read-kbd-macro "s-<right>") 'previous-buffer)
 
 ;; Use F5 or C-S-r to refresh a file.
 (defun really-refresh-file ()
@@ -52,25 +60,9 @@
 (global-set-key [f5] 'really-refresh-file)
 (global-set-key (read-kbd-macro "C-S-r") 'really-refresh-file)
 
-;; Anti-fat-finger quit mode
-(global-set-key
-  (read-kbd-macro "C-x C-c") 'nil)
-(global-set-key
-  (read-kbd-macro "C-x C-c q q") 'kill-emacs)
-
-;; Meta-left and right to switch buffers
-(global-set-key
-  (read-kbd-macro "s-<left>") 'next-buffer)
-(global-set-key
-  (read-kbd-macro "s-<right>") 'previous-buffer)
-
 ;; Move around split buffers using meta key and arrows
 (windmove-default-keybindings 'meta)
 
-(global-set-key
-  (read-kbd-macro "C-S-k") 'kill-this-buffer)
-(global-set-key
-  (read-kbd-macro "s-R") 'rename-buffer)
 
 (defvar iresize-mode-map
   (let ((m (make-sparse-keymap)))
@@ -130,15 +122,13 @@
 
 (require 'smart-tab)
 (require 'coffee-mode)
-(defun coffee-custom ()
-  "coffee-mode-hook"
- (set (make-local-variable 'tab-width) 2))
+(defun coffee-custom () "coffee-mode-hook"
+  (set (make-local-variable 'tab-width) 2))
 (add-hook 'coffee-mode-hook
-  '(lambda() (coffee-custom)))
+          '(lambda() (coffee-custom)))
 
 
 (load "~/.emacs-lib/haskell-mode/haskell-site-file")
-
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
