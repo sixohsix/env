@@ -152,14 +152,25 @@
 
 ;;(define-key 'python-mode-map (kbd "C-c f") 'find-import)
 
-
-(defun reorder-imports (&optional b e)
+(defun sh-region-replace (command &optional b e)
   (interactive "r")
   (push-mark)
-  (shell-command-on-region b e "reorder_imports" (current-buffer) 't)
+  (shell-command-on-region b e command (current-buffer) 't)
   (pop-mark)
   )
-(global-set-key (read-kbd-macro "C-c i") 'reorder-imports)
+(global-set-key
+ (read-kbd-macro "C-c i")
+ (lambda (&optional b e) (interactive "r")
+   (sh-region-replace "reorder-imports" b e)))
+(global-set-key
+ (read-kbd-macro "C-c ]")
+ (lambda (&optional b e) (interactive "r")
+   (sh-region-replace "indent" b e)))
+(global-set-key
+ (read-kbd-macro "C-c [")
+ (lambda (&optional b e) (interactive "r")
+   (sh-region-replace "dedent" b e)))
+
 
 ;;
 ;; Mac only stuff
