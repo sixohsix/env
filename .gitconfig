@@ -15,7 +15,8 @@
         p = pull
         pp = push -u origin HEAD
         s = status -sb
-        setuser = ! git_setuser.py
+        setuser = !git_setuser.py
+        ro = !git rebase origin/`git branch | grep \\* | awk '{print $2}'`
 [color]
         diff = auto
         status = auto
@@ -23,3 +24,6 @@
         interactive = auto
         ui = auto
         pager = true
+[giggle]
+	main-window-maximized = false
+	main-window-geometry = 1918x944+0+17
