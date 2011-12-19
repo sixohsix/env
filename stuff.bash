@@ -69,6 +69,9 @@ vemfresh3.2() {
 # This loads RVM into a shell session.
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
-export PATH=~/bin:$PATH
+[ -d $HOME/.cabal/bin ] && PATH=$HOME/.cabal/bin:$PATH
+[ -d $HOME/bin ] && PATH=$HOME/bin:$PATH
 
-[ -e .pystartup ] && export PYTHONSTARTUP=~/.pystartup
+[ -e $HOME/.pystartup ] && export PYTHONSTARTUP=$HOME/.pystartup
+
+export PATH

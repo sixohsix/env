@@ -203,6 +203,7 @@
 ;; Work-only stuff
 ;;
 (when (string= "client8136\n" (shell-command-to-string "hostname"))
+  (setenv "PATH" (concat (getenv "HOME") "/.cabal/bin:" (getenv "PATH")))
   (add-to-list 'load-path "~/projects/extended_abl_mode")
   (require 'extended-abl)
   (server-start)
