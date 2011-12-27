@@ -69,6 +69,7 @@ vemfresh3.2() {
 # This loads RVM into a shell session.
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
+[ -d /opt/ghc/bin ] && PATH=/opt/ghc/bin:$PATH
 [ -d $HOME/.cabal/bin ] && PATH=$HOME/.cabal/bin:$PATH
 [ -d $HOME/bin ] && PATH=$HOME/bin:$PATH
 

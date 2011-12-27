@@ -161,7 +161,7 @@
 (global-set-key
  (read-kbd-macro "C-c i")
  (lambda (&optional b e) (interactive "r")
-   (sh-region-replace "reorder-imports" b e)))
+   (sh-region-replace "reorder_imports2" b e)))
 (global-set-key
  (read-kbd-macro "C-c ]")
  (lambda (&optional b e) (interactive "r")
