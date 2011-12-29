@@ -31,5 +31,6 @@ xdg-user-dirs-gtk-update
 #xcompmgr -c -f -D3 &
 
 xscreensaver -no-splash &
+unclutter -idle 2 &
 
 exec xmonad
