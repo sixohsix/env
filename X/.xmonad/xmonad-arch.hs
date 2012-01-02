@@ -9,7 +9,7 @@ import XMonad.Prompt.XMonad
 import System.IO
 
 main = do
-  xmproc <- spawnPipe "/home/mike/.cabal/bin/xmobar ~/.xmobarrc"
+  xmproc <- spawnPipe "/usr/bin/xmobar ~/.xmobarrc"
   xmonad $ defaultConfig
     { manageHook = manageDocks <+> manageHook defaultConfig
     , layoutHook = avoidStruts  $  layoutHook defaultConfig

@@ -53,6 +53,12 @@ _vemfresh() {
     eval "vem$1 recreate $pb"
     eval "vem_activate$1 $pb && python setup.py develop"
 }
+vemac2.5() {
+    _vemac 2.5
+}
+vemfresh2.5() {
+    _vemfresh 2.5
+}
 vemac2.7() {
     _vemac 2.7
 }
@@ -74,5 +80,11 @@ vemfresh3.2() {
 [ -d $HOME/bin ] && PATH=$HOME/bin:$PATH
 
 [ -e $HOME/.pystartup ] && export PYTHONSTARTUP=$HOME/.pystartup
+
+alias g=git
+
+alias vemac=vemac2.5
+alias vemfresh=vemfresh2.5
+alias vem_activate=vem_activate2.5
 
 export PATH

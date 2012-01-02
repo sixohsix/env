@@ -1,3 +1,6 @@
+
+Xcursor.theme: Vanilla-DMZ-AA
+
 Emacs.font: Inconsolata-11
 Emacs.fontBackend: xft
 Emacs.menuBar: off
@@ -29,7 +32,7 @@ URxvt*underlineColor: #c5f779
 
 URxvt*background: #2B2B2B
 URxvt*foreground: #EEEEEE
-URxvt*font: xft:Monospace:pixelsize=13
+URxvt*font: xft:Inconsolata-11
 URxvt*boldFont: xft:Monospace:bold:pixelsize=13
 URxvt*saveLines: 4000
 URxvt*scrollBar: false

@@ -1,13 +1,9 @@
 #!/bin/bash
 
-xrdb -merge /home/mike/.Xresources
-#xmodmap ~/.xmodmap
- . /home/mike/.bashrc
-
-echo PATH $PATH
-
+xrdb -merge ~/.Xresources
+xmodmap ~/.xmodmap
 xsetroot -solid "#636161"
+xscreensaver -no-splash &
+unclutter -idle 2 &
 
-#xscreensaver -no-splash &
-
-exec /home/mike/.cabal/bin/xmonad
+exec /usr/bin/xmonad
