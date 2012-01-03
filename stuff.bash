@@ -87,4 +87,7 @@ alias vemac=vemac2.5
 alias vemfresh=vemfresh2.5
 alias vem_activate=vem_activate2.5
 
-export PATH
+gco() {
+  git checkout $@
+  vemac
+}

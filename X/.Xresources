@@ -30,8 +30,8 @@ URxvt*internalBorder: 4
 URxvt.scrollBar: false
 URxvt*underlineColor: #c5f779
 
-URxvt*background: #2B2B2B
-URxvt*foreground: #EEEEEE
+URxvt*background: #0c1f2b
+URxvt*foreground: #95adba
 URxvt*font: xft:Inconsolata-11
 URxvt*boldFont: xft:Monospace:bold:pixelsize=13
 URxvt*saveLines: 4000
