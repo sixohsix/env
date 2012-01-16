@@ -51,7 +51,7 @@ _vemfresh() {
     deactivate 2>/dev/null
     pb=`_project_and_branch`
     eval "vem$1 recreate $pb"
-    eval "vem_activate$1 $pb && python setup.py develop"
+    eval "vem_activate$1 $pb && (python setup.py develop || ./scripts/setup.sh)"
 }
 vemac2.5() {
     _vemac 2.5
@@ -86,8 +86,16 @@ alias g=git
 alias vemac=vemac2.5
 alias vemfresh=vemfresh2.5
 alias vem_activate=vem_activate2.5
+alias n='nosetests -vs'
 
 gco() {
   git checkout $@
   vemac
 }
+
+if [ -e `which virtualenvwrapper.sh 2>&1 >/dev/null` ]
+then
+    WORKON_HOME="$HOME/.venvs2.7"
+    VIRTUALENVWRAPPER_PYTHON=`which python2.7`
+    . `which virtualenvwrapper.sh`
+fi
