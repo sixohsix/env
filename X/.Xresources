@@ -1,6 +1,12 @@
 
 Xcursor.theme: Vanilla-DMZ-AA
 
+Xft.dpi:        96
+Xft.antialias:  true
+Xft.rgba:       rgb
+Xft.hinting:    true
+Xft.hintstyle:  hintslight
+
 Emacs.font: Inconsolata-11
 Emacs.fontBackend: xft
 Emacs.menuBar: off
