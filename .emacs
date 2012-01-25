@@ -115,10 +115,8 @@
 
 (require 'abl)
 (setq expected-projects-base-path "/home/%s/projects")
-(setq vem-activate-command "vem_activate2.5 %s")
-(setq vems-base-dir "~/.virtualenvs2.5")
-;(setq vem-activate-command "vem_activate2.7 %s")
-;(setq vems-base-dir "~/.virtualenvs2.7")
+(setq vem-activate-command "vem_activate2.7 %s")
+(setq vems-base-dir "~/.virtualenvs2.7")
 (setq nose-command "nosetests -vs")
 (add-hook 'find-file-hooks 'abl-mode-hook)
 
@@ -208,7 +206,7 @@
   (setenv "PATH" (concat (getenv "HOME") "/.cabal/bin:" (getenv "PATH")))
   (add-to-list 'load-path "~/projects/extended_abl_mode")
   (require 'extended-abl)
-  (server-start)
+  (setq mouse-autoselect-window t)            ; Follow mouse
   )
 
 (custom-set-faces

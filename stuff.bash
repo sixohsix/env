@@ -83,9 +83,9 @@ vemfresh3.2() {
 
 alias g=git
 
-alias vemac=vemac2.5
-alias vemfresh=vemfresh2.5
-alias vem_activate=vem_activate2.5
+alias vemac=vemac2.7
+alias vemfresh=vemfresh2.7
+alias vem_activate=vem_activate2.7
 alias n='nosetests -vs'
 
 gco() {
