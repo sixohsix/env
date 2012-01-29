@@ -73,7 +73,7 @@ vemfresh3.2() {
 }
 
 # This loads RVM into a shell session.
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+[ -s "$HOME/.rvm/scripts/rvm" ] && . "$HOME/.rvm/scripts/rvm"
 
 [ -d /opt/ghc/bin ] && PATH=/opt/ghc/bin:$PATH
 [ -d $HOME/.cabal/bin ] && PATH=$HOME/.cabal/bin:$PATH
@@ -93,7 +93,7 @@ gco() {
   vemac
 }
 
-if [ -e `which virtualenvwrapper.sh 2>&1 >/dev/null` ]
+if `which virtualenvwrapper.sh 2>&1 >/dev/null`
 then
     WORKON_HOME="$HOME/.venvs2.7"
     VIRTUALENVWRAPPER_PYTHON=`which python2.7`
