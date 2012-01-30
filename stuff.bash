@@ -11,12 +11,14 @@ _available tput && [ `tput colors` != 0 ] \
 
 export EDITOR=zile
 
+alias ll='ls -al'
+alias g=git
+alias develop='. ~/bin/develop.sh'
+
 [ -f git-completion.bash ] \
     && . git-completion.bash \
-    && alias g=git \
     && complete -o bashdefault -o default -o nospace -F _git g 2>/dev/null
 
-alias ll='ls -al'
 
 _vem_activate_a() {
     if _available vem$1;
@@ -93,7 +95,7 @@ gco() {
   vemac
 }
 
-if `which virtualenvwrapper.sh 2>&1 >/dev/null`
+if which virtualenvwrapper.sh 2>&1 >/dev/null
 then
     WORKON_HOME="$HOME/.venvs2.7"
     VIRTUALENVWRAPPER_PYTHON=`which python2.7`
