@@ -11,10 +11,6 @@ _available tput && [ `tput colors` != 0 ] \
 
 export EDITOR=zile
 
-alias ll='ls -al'
-alias g=git
-alias develop='. ~/bin/develop.sh'
-
 [ -f git-completion.bash ] \
     && . git-completion.bash \
     && complete -o bashdefault -o default -o nospace -F _git g 2>/dev/null
@@ -84,11 +80,13 @@ vemfresh3.2() {
 [ -e $HOME/.pystartup ] && export PYTHONSTARTUP=$HOME/.pystartup
 
 alias g=git
-
+alias ll='ls -al'
+alias develop='. ~/bin/develop.sh'
 alias vemac=vemac2.7
 alias vemfresh=vemfresh2.7
 alias vem_activate=vem_activate2.7
 alias n='nosetests -vs'
+alias ssh='TERM=xterm-color ssh'
 
 gco() {
   git checkout $@
