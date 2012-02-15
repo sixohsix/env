@@ -116,7 +116,7 @@
 (require 'abl)
 (setq expected-projects-base-path "/home/%s/projects")
 (setq vem-activate-command "vem_activate2.7 %s")
-(setq vems-base-dir "~/.virtualenvs2.7")
+(setq vems-base-dir "~/.venvs2.7")
 (setq nose-command "nosetests -vs")
 (add-hook 'find-file-hooks 'abl-mode-hook)
 
