@@ -27,9 +27,6 @@ export EDITOR=zile
 alias g=git
 alias ll='ls -al'
 alias develop='. ~/bin/develop.sh'
-alias vemac=vemac2.7
-alias vemfresh=vemfresh2.7
-alias vem_activate=vem_activate2.7
 alias n='nosetests -vs'
 alias ssh='TERM=xterm-color ssh'
 
