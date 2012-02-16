@@ -17,10 +17,15 @@ _usage() {
     echo "  --refresh-venv  recreate the virtualenv"
 }
 
-if ! OPTS=`getopt -n $0 -l refresh-venv,help -o '' -- "$@"`
+if [ `uname` = 'Darwin' ]
 then
-    _usage
-    return 1
+    OPTS=$@
+else
+    if ! OPTS=`getopt -n $0 -l refresh-venv,help -o '' -- "$@"`
+    then
+        _usage
+        return 1
+    fi
 fi
 
 set -- $OPTS
