@@ -177,6 +177,8 @@
 ;;
 (when (string= "ingot.local\n" (shell-command-to-string "hostname"))
 
+  (set-default-font "Anonymous Pro-14")
+
   (menu-bar-mode 0)
   (when (fboundp 'tool-bar-mode)
     (tool-bar-mode 0)
@@ -185,10 +187,6 @@
 
   ;; C-Backslash is delete.
   (global-set-key (read-kbd-macro "C-\\") 'delete-char)
-
-  ;; Apple wants a bigger font for some reason
-  (set-face-attribute 'default nil
-                      :height 160)
 
   (if (eq 'ns window-system)
       (setq default-frame-alist
