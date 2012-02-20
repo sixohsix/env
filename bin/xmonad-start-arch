@@ -2,6 +2,7 @@
 
 xrdb -merge ~/.Xresources
 xmodmap ~/.xmodmap
+setxkbmap -layout us -variant mac
 xsetroot -solid "#636161"
 xscreensaver -no-splash &
 unclutter -idle 2 &
