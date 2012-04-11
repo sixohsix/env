@@ -31,7 +31,10 @@ alias n='nosetests -vs'
 alias ssh='TERM=xterm-color ssh'
 
 gco() {
-  git checkout $@
+  if [ x"$@" != "x" ]; then
+    git checkout $@
+  fi
+  git pull
   develop
 }
 
