@@ -30,6 +30,8 @@ alias develop='. ~/bin/develop.sh'
 alias n='nosetests -vs'
 alias ssh='TERM=xterm-color ssh'
 
+alias jobe='ssh mike@jobe.ca -t tmux -2u attach'
+
 gco() {
   if [ x"$@" != "x" ]; then
     git checkout $@
