@@ -115,7 +115,7 @@
 
 (require 'abl)
 (setq expected-projects-base-path "/home/%s/projects")
-(setq vem-activate-command "vem_activate2.7 %s")
+(setq vem-activate-command "workon %s")
 (setq vems-base-dir "~/.venvs2.7")
 (setq nose-command "nosetests -vs")
 (add-hook 'find-file-hooks 'abl-mode-hook)
@@ -170,6 +170,13 @@
  (read-kbd-macro "C-c [")
  (lambda (&optional b e) (interactive "r")
    (sh-region-replace "dedent" b e)))
+
+
+(require 'haml-mode)
+(add-hook 'haml-mode-hook
+          (lambda ()
+            (setq indent-tabs-mode nil)
+            (define-key haml-mode-map "\C-m" 'newline-and-indent)))
 
 
 ;;
