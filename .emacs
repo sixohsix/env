@@ -54,8 +54,6 @@
 (global-set-key (read-kbd-macro "M-<left>") 'next-buffer)
 (global-set-key (read-kbd-macro "M-<right>") 'previous-buffer)
 
-(global-set-key (read-kbd-macro "M--")
-
 ;; Use F5 to refresh a file.
 (defun really-refresh-file ()
   (interactive)
