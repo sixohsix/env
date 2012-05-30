@@ -42,9 +42,12 @@ gco() {
   develop
 }
 
-if which virtualenvwrapper.sh 2>&1 >/dev/null
-then
-    WORKON_HOME="$HOME/.venvs2.7"
-    VIRTUALENVWRAPPER_PYTHON=`which python2.7`
-    . `which virtualenvwrapper.sh`
+if which virtualenvwrapper.sh 2>&1 >/dev/null; then
+  WORKON_HOME="$HOME/.venvs2.7"
+  VIRTUALENVWRAPPER_PYTHON=`which python2.7`
+  . `which virtualenvwrapper.sh`
+fi
+
+if [ "$TERM" = "xterm" ]; then
+  TERM="xterm-256color"
 fi
