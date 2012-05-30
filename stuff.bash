@@ -30,7 +30,9 @@ alias develop='. ~/bin/develop.sh'
 alias n='nosetests -vs'
 alias ssh='TERM=xterm-color ssh'
 
-alias jobe='ssh mike@jobe.ca -t tmux -2u attach'
+#alias jobe='ssh mike@jobe.ca -t tmux -2u attach'
+alias jobe='mosh --server="LANG=en_US.UTF-8 mosh-server" -- mike@jobe.ca tmux -2u attach'
+alias jobe-tunnel='ssh -D 9090 mike@jobe.ca'
 
 gco() {
   if [ x"$@" != "x" ]; then
