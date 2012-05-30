@@ -3,8 +3,7 @@
         bb = branch -avv
         bd = branch -d
         bnuke = !git branch -d $1 && git push --delete origin
-        c = commit -am
-        ce = commit -ae
+        c = commit -ae
         co = checkout
         d = diff
         df = diff --name-status

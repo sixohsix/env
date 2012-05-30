@@ -10,6 +10,8 @@
 (setq ring-bell-function 'ignore)           ; beeping noise: STFU!!
 (setq-default show-trailing-whitespace t)   ; I hate trailing whitespace.
 (blink-cursor-mode (- (*) (*) (*)))         ; No blinking
+(menu-bar-mode 0)                           ; No menu
+(transient-mark-mode 0)                     ; No highlight
 
 ;; Insert mode is garbage.
 (global-set-key
@@ -40,8 +42,8 @@
 (global-set-key
  (read-kbd-macro "C-x P")
  "<?python\n  import pdb; pdb.set_trace() # --miv DEBUG\n ?>\n")
-(global-set-key (read-kbd-macro "C-S-s") 'rgrep)
-(global-set-key (read-kbd-macro "C-S-k") 'kill-this-buffer)
+(global-set-key (read-kbd-macro "C-M-s") 'rgrep)
+(global-set-key (read-kbd-macro "C-M-k") 'kill-this-buffer)
 (global-set-key (read-kbd-macro "C-c c") 'delete-trailing-whitespace)
 
 ;; Anti-fat-finger quit mode
@@ -49,19 +51,17 @@
 (global-set-key (read-kbd-macro "C-x C-c q q") 'kill-emacs)
 
 ;; Meta-left and right to switch buffers
-(global-set-key (read-kbd-macro "s-<left>") 'next-buffer)
-(global-set-key (read-kbd-macro "s-<right>") 'previous-buffer)
+(global-set-key (read-kbd-macro "M-<left>") 'next-buffer)
+(global-set-key (read-kbd-macro "M-<right>") 'previous-buffer)
 
-;; Use F5 or C-S-r to refresh a file.
+(global-set-key (read-kbd-macro "M--")
+
+;; Use F5 to refresh a file.
 (defun really-refresh-file ()
   (interactive)
   (revert-buffer t t t)
   )
 (global-set-key [f5] 'really-refresh-file)
-(global-set-key (read-kbd-macro "C-S-r") 'really-refresh-file)
-
-;; Move around split buffers using meta key and arrows
-(windmove-default-keybindings 'meta)
 
 
 (defvar iresize-mode-map
@@ -154,9 +154,7 @@
 
 (defun sh-region-replace (command &optional b e)
   (interactive "r")
-  (push-mark)
   (shell-command-on-region b e command (current-buffer) 't)
-  (pop-mark)
   )
 (global-set-key
  (read-kbd-macro "C-c i")
@@ -185,8 +183,6 @@
 (when (string= "ingot.local\n" (shell-command-to-string "hostname"))
 
   (set-default-font "Anonymous Pro-14")
-
-  (menu-bar-mode 0)
   (when (fboundp 'tool-bar-mode)
     (tool-bar-mode 0)
     (scroll-bar-mode 0)

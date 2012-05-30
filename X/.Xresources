@@ -43,3 +43,10 @@ URxvt*boldFont: xft:AnonymousPro-11:bold
 URxvt*saveLines: 4000
 URxvt*scrollBar: false
 URxvt*scrollstyle: rxvt
+
+xterm*background: #0c1f2b
+xterm*foreground: #95adba
+xterm*faceName: Anonymous Pro:pixelsize=14
+xterm*modifyOtherKeys: 1
+xterm*modifier: meta
+xterm*metaSendsEscape: true
