@@ -206,4 +206,5 @@
   (add-to-list 'load-path "~/projects/extended_abl_mode")
   (require 'extended-abl)
   (setq mouse-autoselect-window t)            ; Follow mouse
+  (xterm-mouse-mode t)
   )
