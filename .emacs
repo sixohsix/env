@@ -38,7 +38,7 @@
           (lambda () (interactive) (column-marker-1 80)))
 
 (global-set-key
- (read-kbd-macro "C-x p") "import pdb; pdb.set_trace() # --miv DEBUG")
+ (read-kbd-macro "C-x p") "import bpdb; bpdb.set_trace() # --miv DEBUG")
 (global-set-key
  (read-kbd-macro "C-x P")
  "<?python\n  import pdb; pdb.set_trace() # --miv DEBUG\n ?>\n")
@@ -98,6 +98,9 @@
 (setq js2-consistent-level-indent-inner-bracket-p 'true)
 (setq js2-mirror-mode nil)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+
+(require 'feature-mode)
+(add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
 
 (put 'narrow-to-region 'disabled nil)
 
