@@ -11,6 +11,7 @@
 (setq-default show-trailing-whitespace t)   ; I hate trailing whitespace.
 (blink-cursor-mode (- (*) (*) (*)))         ; No blinking
 (menu-bar-mode 0)                           ; No menu
+(tool-bar-mode 0)
 (transient-mark-mode 0)                     ; No highlight
 
 ;; Insert mode is garbage.
@@ -113,6 +114,7 @@
 (autopair-global-mode) ;; enable autopair in all buffers
 
 (require 'miv-mark-zoom)
+(require 'miv-sexy-powerline)
 
 (require 'abl)
 (setq expected-projects-base-path "/home/%s/projects")
@@ -206,8 +208,8 @@
 ;;
 (when (string= "client8136\n" (shell-command-to-string "hostname"))
   (setenv "PATH" (concat (getenv "HOME") "/.cabal/bin:" (getenv "PATH")))
-  (add-to-list 'load-path "~/projects/extended_abl_mode")
-  (require 'extended-abl)
+  ;; (add-to-list 'load-path "~/projects/extended_abl_mode")
+  ;; (require 'extended-abl)
   (setq mouse-autoselect-window t)            ; Follow mouse
-  (xterm-mouse-mode t)
+  ;;(xterm-mouse-mode t)
   )
