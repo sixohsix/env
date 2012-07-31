@@ -11,6 +11,7 @@
 (setq-default show-trailing-whitespace t)   ; I hate trailing whitespace.
 (blink-cursor-mode (- (*) (*) (*)))         ; No blinking
 (menu-bar-mode 0)                           ; No menu
+(tool-bar-mode 0)
 (transient-mark-mode 0)                     ; No highlight
 
 ;; Insert mode is garbage.
@@ -38,7 +39,7 @@
           (lambda () (interactive) (column-marker-1 80)))
 
 (global-set-key
- (read-kbd-macro "C-x p") "import pdb; pdb.set_trace() # --miv DEBUG")
+ (read-kbd-macro "C-x p") "import bpdb; bpdb.set_trace() # --miv DEBUG")
 (global-set-key
  (read-kbd-macro "C-x P")
  "<?python\n  import pdb; pdb.set_trace() # --miv DEBUG\n ?>\n")
@@ -99,6 +100,9 @@
 (setq js2-mirror-mode nil)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
+(require 'feature-mode)
+(add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
+
 (put 'narrow-to-region 'disabled nil)
 
 ;; Automagically tab new lines
@@ -110,6 +114,7 @@
 (autopair-global-mode) ;; enable autopair in all buffers
 
 (require 'miv-mark-zoom)
+(require 'miv-sexy-powerline)
 
 (require 'abl)
 (setq expected-projects-base-path "/home/%s/projects")
@@ -203,7 +208,8 @@
 ;;
 (when (string= "client8136\n" (shell-command-to-string "hostname"))
   (setenv "PATH" (concat (getenv "HOME") "/.cabal/bin:" (getenv "PATH")))
-  (add-to-list 'load-path "~/projects/extended_abl_mode")
-  (require 'extended-abl)
+  ;; (add-to-list 'load-path "~/projects/extended_abl_mode")
+  ;; (require 'extended-abl)
   (setq mouse-autoselect-window t)            ; Follow mouse
+  ;;(xterm-mouse-mode t)
   )

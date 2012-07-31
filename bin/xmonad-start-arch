@@ -7,4 +7,4 @@ xsetroot -solid "#636161"
 xscreensaver -no-splash &
 unclutter -idle 2 &
 
-exec /usr/bin/xmonad
+exec /usr/bin/ssh-agent /usr/bin/xmonad

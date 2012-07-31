@@ -1,0 +1,10 @@
+# inittab autologin miv
+
+c1:2345:respawn:/sbin/agetty -a miv -8 -s 38400 tty1 linux
+
+
+# Start X on tty login.
+
+if [[ -z $DISPLAY && $(tty) = /dev/tty1 ]]; then
+  exec startx
+fi
