@@ -28,6 +28,7 @@ alias g=git
 alias ll='ls -al'
 alias develop='. ~/bin/develop.sh'
 alias n='nosetests -vs'
+alias b='behave --no-capture -t-browser'
 alias ssh='TERM=xterm-color ssh'
 
 alias jobe='ssh mike@jobe.ca -t tmux -2u attach'
@@ -49,3 +50,22 @@ fi
 if [ "$TERM" = "xterm" ]; then
   TERM="xterm-256color"
 fi
+
+
+function parse_git_branch {
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \1/'
+}
+
+function proml {
+  local        BLUE="\[\033[0;34m\]"
+  local         RED="\[\033[0;31m\]"
+  local   LIGHT_RED="\[\033[1;31m\]"
+  local       GREEN="\[\033[0;32m\]"
+  local LIGHT_GREEN="\[\033[1;32m\]"
+  local       WHITE="\[\033[1;37m\]"
+  local  LIGHT_GRAY="\[\033[0;37m\]"
+  local     DEFAULT="\[\033[0m\]"
+  PS1="$GREEN\u@\h:\W$LIGHT_GREEN\$(parse_git_branch)$DEFAULT\$"
+}
+
+proml
