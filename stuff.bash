@@ -11,10 +11,6 @@ _available tput && [ `tput colors` != 0 ] \
 
 export EDITOR=zile
 
-[ -f git-completion.bash ] \
-    && . git-completion.bash \
-    && complete -o bashdefault -o default -o nospace -F _git g 2>/dev/null
-
 # This loads RVM into a shell session.
 [ -s "$HOME/.rvm/scripts/rvm" ] && . "$HOME/.rvm/scripts/rvm"
 
@@ -61,18 +57,12 @@ function parse_git_status {
   local AHEAD=`echo ${SOUT} | head -n 1 | sed -nre 's/^.*\[ahead (.*)\].*$/\1/p'`
   local DIRTY=""
   if [ "x$AHEAD" != "x" ]; then
-    AHEAD="+${AHEAD}"
+    AHEAD="+${AHEAD} "
   fi
   if echo "${SOUT}" | tail -n +2 | grep -v "?" &>/dev/null; then
     DIRTY="* "
   fi
-  echo "$AHEAD $DIRTY"
-}
-
-function parse_git {
-  local LIGHT_GREEN="\[\033[1;32m\]"
-  local         RED="\[\033[0;31m\]"
-  echo "$RED$"
+  echo "$AHEAD$DIRTY"
 }
 
 function proml {
@@ -91,3 +81,11 @@ function proml {
 }
 
 proml
+
+GIT_COMPLETION_SCRIPT="/usr/share/git/completion/git-completion.bash"
+
+if [ -e $GIT_COMPLETION_SCRIPT ]; then
+  . $GIT_COMPLETION_SCRIPT
+  __git_complete g __git_main
+fi
+
