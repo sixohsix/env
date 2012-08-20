@@ -64,9 +64,9 @@ function parse_git_status {
     AHEAD="+${AHEAD}"
   fi
   if echo "${SOUT}" | tail -n +2 | grep -v "?" &>/dev/null; then
-    DIRTY=" *"
+    DIRTY="* "
   fi
-  echo "$AHEAD$DIRTY"
+  echo "$AHEAD $DIRTY"
 }
 
 function parse_git {
