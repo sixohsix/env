@@ -56,6 +56,25 @@ function parse_git_branch {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \1/'
 }
 
+function parse_git_status {
+  local SOUT=`g status  --porcelain -b 2>/dev/null`
+  local AHEAD=`echo ${SOUT} | head -n 1 | sed -nre 's/^.*\[ahead (.*)\].*$/\1/p'`
+  local DIRTY=""
+  if [ "x$AHEAD" != "x" ]; then
+    AHEAD="+${AHEAD}"
+  fi
+  if echo "${SOUT}" | tail -n +2 | grep -v "?" &>/dev/null; then
+    DIRTY=" *"
+  fi
+  echo "$AHEAD$DIRTY"
+}
+
+function parse_git {
+  local LIGHT_GREEN="\[\033[1;32m\]"
+  local         RED="\[\033[0;31m\]"
+  echo "$RED$"
+}
+
 function proml {
   local        BLUE="\[\033[0;34m\]"
   local         RED="\[\033[0;31m\]"
@@ -65,7 +84,10 @@ function proml {
   local       WHITE="\[\033[1;37m\]"
   local  LIGHT_GRAY="\[\033[0;37m\]"
   local     DEFAULT="\[\033[0m\]"
-  PS1="$GREEN\u@\h:\W$LIGHT_GREEN\$(parse_git_branch)$DEFAULT\$"
+  local STATUS
+
+  local out
+  PS1="$GREEN\u@\h:\W$LIGHT_GRAY\$(parse_git_branch)$RED\$(parse_git_status)$DEFAULT\$ "
 }
 
 proml
