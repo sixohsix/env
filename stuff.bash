@@ -1,6 +1,8 @@
 # bash
 
 export PS1='\u@\h:\W$ '
+export REUSE_DB=1
+export EDITOR=zile
 
 _available() {
     which $1 >/dev/null 2>&1
@@ -9,12 +11,11 @@ _available() {
 _available tput && [ `tput colors` != 0 ] \
     && export CLICOLOR=1
 
-export EDITOR=zile
-
 # This loads RVM into a shell session.
-[ -s "$HOME/.rvm/scripts/rvm" ] && . "$HOME/.rvm/scripts/rvm"
+#[ -s "$HOME/.rvm/scripts/rvm" ] && . "$HOME/.rvm/scripts/rvm"
 
 [ -d /opt/ghc/bin ] && PATH=/opt/ghc/bin:$PATH
+[ -d $HOME/Library/Haskell/bin ] && PATH=$HOME/Library/Haskell/bin:$PATH
 [ -d $HOME/.cabal/bin ] && PATH=$HOME/.cabal/bin:$PATH
 [ -d $HOME/bin ] && PATH=$HOME/bin:$PATH
 
@@ -88,4 +89,3 @@ if [ -e $GIT_COMPLETION_SCRIPT ]; then
   . $GIT_COMPLETION_SCRIPT
   __git_complete g __git_main
 fi
-
