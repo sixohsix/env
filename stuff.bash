@@ -4,6 +4,12 @@ export PS1='\u@\h:\W$ '
 export REUSE_DB=1
 export EDITOR=zile
 
+if [ `uname` == "Darwin" ]; then
+  SED='sed -E'
+else
+  SED='sed -n'
+fi
+
 _available() {
     which $1 >/dev/null 2>&1
 }
@@ -57,13 +63,14 @@ function parse_git_branch {
 }
 
 function parse_git_status {
-  local SOUT=`g status  --porcelain -b 2>/dev/null`
-  local AHEAD=`echo ${SOUT} | head -n 1 | sed -nre 's/^.*\[ahead (.*)\].*$/\1/p'`
+  if [ ! -d .git ]; then return; fi
+
+  local AHEAD=`git status -sb | head -n 1 | $SED -ne 's/^.*\[ahead (.*)\].*$/\1/p'`
   local DIRTY=""
   if [ "x$AHEAD" != "x" ]; then
     AHEAD="+${AHEAD} "
   fi
-  if echo "${SOUT}" | tail -n +2 | grep -v "?" &>/dev/null; then
+  if git status -sb | tail -n +2 | grep -v '?' &>/dev/null; then
     DIRTY="* "
   fi
   echo "$AHEAD$DIRTY"
