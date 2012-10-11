@@ -26,9 +26,8 @@ else
         _usage
         return 1
     fi
+    set -- $OPTS
 fi
-
-set -- $OPTS
 
 _project_and_branch() {
     _proj=`pwd | awk -F / '{print $NF}'`
@@ -62,7 +61,7 @@ do
     shift
 done
 
-mkvirtualenv -q $ve_flags `_project_and_branch`
+mkvirtualenv $ve_flags `_project_and_branch`
 
 if [ x"$VIRTUAL_ENV" = "x" ]
 then
@@ -76,8 +75,9 @@ else
         if [ -e dev_requirements.txt ]
         then pip_args=$pip_args" -r dev_requirements.txt"; fi
 
-        pip-2.7 install $pip_args -e .
+        pip install $pip_args -e .
     else
         echo "Warning: setup.py not found."
     fi
 fi
+

@@ -38,6 +38,7 @@ alias ssh='TERM=xterm-color ssh'
 alias jobe='mosh --server="LANG=en_US.UTF-8 mosh-server" -- mike@jobe.ca tmux -2u attach'
 alias jobe-tunnel='ssh -D 9090 mike@jobe.ca'
 alias arc2='ssh mike@176.58.123.152 -t tmux -2u attach'
+alias use_python=". ~/bin/use_python.sh"
 
 gco() {
   if [ x"$@" != "x" ]; then
