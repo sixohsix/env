@@ -7,7 +7,7 @@ export EDITOR=zile
 if [ `uname` == "Darwin" ]; then
   SED='sed -E'
 else
-  SED='sed -n'
+  SED='sed -r'
 fi
 
 _available() {
