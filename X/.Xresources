@@ -69,3 +69,10 @@ xterm*color8: #666666
 xterm*color9: #cf6171
 xterm*colorUL: #c5f779
 xterm*cursorColor: magenta
+xterm*utf8: 1
+xterm*locale: UTF-8
+
+*ttyModes:         erase ^?
+*VT100.Translations: \
+    #override <Key>BackSpace: string(0x7f) \n\
+              <Key>Delete:    string(0x1b) string("[3~")
