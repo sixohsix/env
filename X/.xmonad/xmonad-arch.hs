@@ -24,4 +24,6 @@ main = do
     [ ("C-<Print>", spawn "sleep 0.2; scrot -s")
     , ("M-x r", runOrRaisePrompt defaultXPConfig)
     , ("M-x x", xmonadPrompt defaultXPConfig)
+    , ("M-="  , spawn "amixer sset Master 1.5dB+")
+    , ("M--"  , spawn "amixer sset Master 1.5dB-")
     ]
