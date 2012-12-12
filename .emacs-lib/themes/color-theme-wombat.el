@@ -4,7 +4,7 @@
 
 (defun color-theme-wombat ()
 	(interactive)
-	(color-theme-install '(color-theme-wombat 
+	(color-theme-install '(color-theme-wombat
 	(
 		(foreground-color . "#f6f3e8")
 		(background-color . "#242424")
