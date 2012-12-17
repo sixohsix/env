@@ -1,4 +1,5 @@
 import XMonad
+import XMonad.Actions.UpdateFocus as UF
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run(spawnPipe)
@@ -19,6 +20,8 @@ main = do
       { ppOutput = hPutStrLn xmproc
       , ppTitle = xmobarColor "green" "" . shorten 100
       }
+    , startupHook = UF.adjustEventInput
+    , handleEventHook = UF.focusOnMouseMove
     }
     `additionalKeysP`
     [ ("C-<Print>", spawn "sleep 0.2; scrot -s")
