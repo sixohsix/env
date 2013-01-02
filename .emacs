@@ -21,6 +21,26 @@
 ;; Behave like a normal editor and delete region when you type
 (delete-selection-mode 1)
 
+
+;; xterm keys
+(define-key input-decode-map "\e[1;5A" [C-up])
+(define-key input-decode-map "\e[1;5B" [C-down])
+(define-key input-decode-map "\e[1;5C" [C-right])
+(define-key input-decode-map "\e[1;5D" [C-left])
+(define-key input-decode-map "\e[1;3A" [M-up])
+(define-key input-decode-map "\e[1;3B" [M-down])
+(define-key input-decode-map "\e[1;3C" [M-right])
+(define-key input-decode-map "\e[1;3D" [M-left])
+(define-key input-decode-map "\e[1;6A" [C-S-up])
+(define-key input-decode-map "\e[1;6B" [C-S-down])
+(define-key input-decode-map "\e[1;6C" [C-S-right])
+(define-key input-decode-map "\e[1;6D" [C-S-left])
+(define-key input-decode-map "\e[1;7A" [C-M-up])
+(define-key input-decode-map "\e[1;7B" [C-M-down])
+(define-key input-decode-map "\e[1;7C" [C-M-right])
+(define-key input-decode-map "\e[1;7D" [C-M-left])
+
+
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'reverse)
 (setq uniquify-separator "|")
