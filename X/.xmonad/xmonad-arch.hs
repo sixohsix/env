@@ -14,22 +14,29 @@ myKeys = [
   ("M-x r", runOrRaisePrompt defaultXPConfig),
   ("M-x x", xmonadPrompt defaultXPConfig),
   ("M-="  , spawn "amixer sset Master 1.5dB+"),
-  ("M--"  , spawn "amixer sset Master 1.5dB-")
+  ("M--"  , spawn "amixer sset Master 1.5dB-"),
+  ("M-b"  , sendMessage ToggleStruts)
   ]
 
-myConfig xmProc = defaultConfig {
-  manageHook = manageDocks <+> manageHook defaultConfig,
-  layoutHook = avoidStruts  $  layoutHook defaultConfig,
+myConfig = defaultConfig {
+--  manageHook = manageDocks <+> manageHook defaultConfig,
+--  layoutHook = avoidStruts (layoutHook defaultConfig),
   modMask = mod4Mask,
   terminal = "xterm",
-  logHook = dynamicLogWithPP xmobarPP {
-    ppOutput = hPutStrLn xmProc,
-    ppTitle = xmobarColor "green" "" . shorten 100
-    },
   startupHook = UF.adjustEventInput,
   handleEventHook = UF.focusOnMouseMove
   } `additionalKeysP` myKeys
 
+xmobarCmd = "/usr/bin/xmobar ~/.xmobarrc"
+
+toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
+
+myXmobarPP = xmobarPP {
+  ppCurrent = xmobarColor "green" "" . shorten 100
+  }
+
+addStatusBar = statusBar xmobarCmd myXmobarPP toggleStrutsKey
+
 main = do
-  xmProc <- spawnPipe "/usr/bin/xmobar ~/.xmobarrc"
-  xmonad $ myConfig xmProc
+  config <- addStatusBar myConfig
+  xmonad config
