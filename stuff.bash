@@ -32,7 +32,6 @@ alias ll='ls -al'
 alias develop='. ~/bin/develop.sh'
 alias n='nosetests -vs'
 alias dn='python abl/web/manage.py test -s'
-alias b='behave --no-capture -t-browser'
 alias ssh='TERM=xterm-color ssh'
 
 #alias jobe='ssh mike@jobe.ca -t tmux -2u attach'

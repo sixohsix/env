@@ -44,4 +44,8 @@ xterm*locale: UTF-8
 *ttyModes:         erase ^?
 *VT100.Translations: \
     #override <Key>BackSpace: string(0x7f) \n\
-              <Key>Delete:    string(0x1b) string("[3~")
+              <Key>Delete:    string(0x1b) string("[3~") \n\
+              Shift <KeyPress> Insert:        insert-selection(CLIPBOARD) \n\
+              <Btn2Up>:                       insert-selection(SELECT, CUT_BUFFER0) \n\
+              ~Shift<BtnUp>:                  select-end(PRIMARY, CUT_BUFFER0) \n\
+              Shift<BtnUp>:                   select-end(CLIPBOARD, CUT_BUFFER1)

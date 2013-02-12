@@ -3,7 +3,7 @@
 eval `/usr/bin/ssh-agent -s`
 xrdb -merge ~/.Xresources
 xmodmap ~/.xmodmap
-setxkbmap -layout us -variant mac
+setxkbmap us -variant mac
 xsetroot -solid "#636161"
 xsetroot -cursor_name left_ptr
 xscreensaver -no-splash &

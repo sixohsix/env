@@ -1,0 +1,3 @@
+#!/bin/bash
+
+behave --no-capture -t-browser abl/test/features -i $@

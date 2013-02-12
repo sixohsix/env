@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/bin/bash
+
+set +H
 
 if [ x"$@" == "x" ]; then
     git commit -ae
