@@ -16,6 +16,7 @@
         s = status -sb
         setuser = !git_setuser.py
         ro = !git rebase origin/`git branch | grep \\* | awk '{print $2}'`
+        addnew = !git status -s | cut -c 4- | xargs git add
 [color]
         diff = auto
         status = auto
@@ -25,6 +26,7 @@
         pager = true
 [giggle]
 	main-window-maximized = false
-	main-window-geometry = 1918x944+0+17
+	main-window-geometry = 1918x872+0+18
+	file-view-vpane-position = 410
 [pivotal]
 	full-name = Mike Verdone
