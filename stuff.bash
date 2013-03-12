@@ -30,7 +30,7 @@ _available tput && [ `tput colors` != 0 ] \
 alias g=git
 alias ll='ls -al'
 alias develop='. ~/bin/develop.sh'
-alias n='nosetests -vs'
+alias n='nosetests -vs --nologcapture'
 alias dn='python abl/web/manage.py test -s'
 alias ssh='TERM=xterm-color ssh'
 

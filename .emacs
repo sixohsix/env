@@ -150,6 +150,8 @@
 (add-hook 'coffee-mode-hook
           '(lambda() (coffee-custom)))
 
+(require 'undo-tree)
+(global-undo-tree-mode 1)
 
 (load "~/.emacs-lib/haskell-mode/haskell-site-file")
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
