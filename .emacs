@@ -21,6 +21,7 @@
 ;; Behave like a normal editor and delete region when you type
 (delete-selection-mode 1)
 
+(load-theme 'wombat)
 
 ;; xterm keys
 (define-key input-decode-map "\e[1;5A" [C-up])
@@ -89,7 +90,7 @@
     (define-key m (kbd "<up>") 'enlarge-window)
     (define-key m (kbd "n") 'shrink-window)
     (define-key m (kbd "<down>") 'shrink-window)
-    (define-key m (kbd "C-c C-c") 'iresize-mode)
+    (define-key m (kbd "C-q") 'iresize-mode)
     (define-key m (kbd "<left>") 'shrink-window-horizontally)
     (define-key m (kbd "<right>") 'enlarge-window-horizontally)
     m))
@@ -98,14 +99,8 @@
   :lighter " IResize"
   :keymap iresize-mode-map
   :group 'iresize)
-(provide 'iresize)
 (global-set-key
   (read-kbd-macro "C-x t w") 'iresize-mode)
-
-
-(require 'color-theme)
-(color-theme-initialize)
-(color-theme-wombat)
 
 ;; Make terminal colors look good against black
 (setq ansi-term-color-vector
@@ -127,7 +122,6 @@
 
 ;; Automagically tab new lines
 (global-set-key (kbd "RET") 'newline-and-indent)
-
 
 ;; autopair braces () {} "" <> etc.
 (require 'autopair)
