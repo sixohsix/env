@@ -41,7 +41,6 @@
 (define-key input-decode-map "\e[1;7C" [C-M-right])
 (define-key input-decode-map "\e[1;7D" [C-M-left])
 
-
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'reverse)
 (setq uniquify-separator "|")
@@ -75,6 +74,10 @@
 ;; Meta-left and right to switch buffers
 (global-set-key (read-kbd-macro "M-<left>") 'next-buffer)
 (global-set-key (read-kbd-macro "M-<right>") 'previous-buffer)
+
+;; home and end go around a line
+(global-set-key (read-kbd-macro "<home>") 'beginning-of-line)
+(global-set-key (read-kbd-macro "<end>")  'end-of-line)
 
 ;; Use F5 to refresh a file.
 (defun really-refresh-file ()
@@ -200,8 +203,6 @@
 ;; Mac only stuff
 ;;
 (when (string= "ingot.local\n" (shell-command-to-string "hostname"))
-
-  (set-default-font "Anonymous Pro-14")
   (when (fboundp 'tool-bar-mode)
     (tool-bar-mode 0)
     (scroll-bar-mode 0)
@@ -218,17 +219,9 @@
     )
   )
 
+(set-frame-font "Anonymous Pro-14")
 
-;;
-;; Work-only stuff
-;;
-(when (string= "client8136\n" (shell-command-to-string "hostname"))
-  (setenv "PATH" (concat (getenv "HOME") "/.cabal/bin:" (getenv "PATH")))
-  ;; (add-to-list 'load-path "~/projects/extended_abl_mode")
-  ;; (require 'extended-abl)
-  (setq mouse-autoselect-window t)            ; Follow mouse
-  ;;(xterm-mouse-mode t)
-  )
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

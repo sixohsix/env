@@ -94,7 +94,7 @@ function proml {
 
 proml
 
-GIT_COMPLETION_SCRIPT="/usr/share/git/completion/git-completion.bash"
+GIT_COMPLETION_SCRIPT="/usr/share/git-core/git-completion.bash"
 
 if [ -e $GIT_COMPLETION_SCRIPT ]; then
   . $GIT_COMPLETION_SCRIPT
