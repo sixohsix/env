@@ -17,15 +17,20 @@ _available() {
 _available tput && [ `tput colors` != 0 ] \
     && export CLICOLOR=1
 
-# This loads RVM into a shell session.
-#[ -s "$HOME/.rvm/scripts/rvm" ] && . "$HOME/.rvm/scripts/rvm"
-
 [ -d /opt/ghc/bin ] && PATH=/opt/ghc/bin:$PATH
 [ -d $HOME/Library/Haskell/bin ] && PATH=$HOME/Library/Haskell/bin:$PATH
 [ -d $HOME/.cabal/bin ] && PATH=$HOME/.cabal/bin:$PATH
 [ -d $HOME/bin ] && PATH=$HOME/bin:$PATH
+[ -d /usr/local/opt/ruby/bin/ ] && PATH=/usr/local/opt/ruby/bin/:$PATH
 
 [ -e $HOME/.pystartup ] && export PYTHONSTARTUP=$HOME/.pystartup
+
+_LOCALE=en_CA.UTF-8
+
+if [ $(locale -a | grep $_LOCALE) ]; then
+  export LC_ALL=$_LOCALE
+  export LANG=$_LOCALE
+fi
 
 alias g=git
 alias ll='ls -al'
@@ -35,7 +40,7 @@ alias dn='python abl/web/manage.py test -s'
 alias ssh='TERM=xterm-color ssh'
 
 #alias jobe='ssh mike@jobe.ca -t tmux -2u attach'
-alias jobe='mosh --server="LANG=en_US.UTF-8 mosh-server" -- mike@jobe.ca tmux -2u attach'
+alias jobe='mosh mike@jobe.ca -- tmux -2u attach'
 alias jobe-tunnel='ssh -D 9090 mike@jobe.ca'
 alias arc2='ssh mike@176.58.123.152 -t tmux -2u attach'
 alias use_python=". ~/bin/use_python.sh"
