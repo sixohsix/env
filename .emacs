@@ -41,6 +41,19 @@
 (define-key input-decode-map "\e[1;7C" [C-M-right])
 (define-key input-decode-map "\e[1;7D" [C-M-left])
 
+
+;; Fix PATH
+(defun set-exec-path-from-shell-PATH ()
+  "Set up Emacs' `exec-path' and PATH environment variable to match that used by the user's shell."
+  (interactive)
+  (let ((path-from-shell (replace-regexp-in-string
+                          "[ \t\n]*$" ""
+                          (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
+    (setenv "PATH" path-from-shell)
+    (setq exec-path (split-string path-from-shell path-separator))))
+(set-exec-path-from-shell-PATH)
+
+
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'reverse)
 (setq uniquify-separator "|")
@@ -133,12 +146,12 @@
 (require 'miv-mark-zoom)
 (require 'miv-sexy-powerline)
 
-(require 'abl)
-(setq expected-projects-base-path "/home/%s/projects")
-(setq vem-activate-command "workon %s")
-(setq vems-base-dir "~/.venvs2.7")
-(setq nose-command "nosetests -vs")
-(add-hook 'find-file-hooks 'abl-mode-hook)
+;; (require 'abl)
+;; (setq expected-projects-base-path "/home/%s/projects")
+;; (setq vem-activate-command "workon %s")
+;; (setq vems-base-dir "~/.venvs2.7")
+;; (setq nose-command "nosetests -vs")
+;; (add-hook 'find-file-hooks 'abl-mode-hook)
 
 (require 'smart-tab)
 (require 'coffee-mode)
@@ -158,21 +171,22 @@
 
 
 ;; Find python imports.
-(defun find-import ()
-  (interactive)
-  (let ((current (point)))
-    (re-search-backward "[\n \.\(\)\"\',]" nil t)
-    (forward-char)
-    (let* ((start (point))
-       (end (- (re-search-forward "[\n \.\(\)\"\',]" nil t) 1))
-       (entity (buffer-substring-no-properties start end))
-       (re (format "import \\(\\(\(\n?\\)[^\)]*\\)?\\(.*\\)?%s" entity)))
-      (goto-char (point-min))
-      (unless (re-search-forward re nil t)
-    (goto-char current)
-    (message "import could not be found")))))
+;; (defun find-import ()
+;;   (interactive)
+;;   (let ((current (point)))
+;;     (re-search-backward "[\n \.\(\)\"\',]" nil t)
+;;     (forward-char)
+;;     (let* ((start (point))
+;;        (end (- (re-search-forward "[\n \.\(\)\"\',]" nil t) 1))
+;;        (entity (buffer-substring-no-properties start end))
+;;        (re (format "import \\(\\(\(\n?\\)[^\)]*\\)?\\(.*\\)?%s" entity)))
+;;       (goto-char (point-min))
+;;       (unless (re-search-forward re nil t)
+;;     (goto-char current)
+;;     (message "import could not be found")))))
 
-;;(define-key 'python-mode-map (kbd "C-c f") 'find-import)
+;; (define-key 'python-mode-map (kbd "C-c f") 'find-import)
+
 
 (defun sh-region-replace (command &optional b e)
   (interactive "r")
@@ -182,14 +196,6 @@
  (read-kbd-macro "C-c i")
  (lambda (&optional b e) (interactive "r")
    (sh-region-replace "reorder_imports2" b e)))
-(global-set-key
- (read-kbd-macro "C-c ]")
- (lambda (&optional b e) (interactive "r")
-   (sh-region-replace "indent" b e)))
-(global-set-key
- (read-kbd-macro "C-c [")
- (lambda (&optional b e) (interactive "r")
-   (sh-region-replace "dedent" b e)))
 
 
 (require 'haml-mode)
