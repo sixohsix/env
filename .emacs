@@ -24,22 +24,25 @@
 (load-theme 'wombat)
 
 ;; xterm keys
-(define-key input-decode-map "\e[1;5A" [C-up])
-(define-key input-decode-map "\e[1;5B" [C-down])
-(define-key input-decode-map "\e[1;5C" [C-right])
-(define-key input-decode-map "\e[1;5D" [C-left])
-(define-key input-decode-map "\e[1;3A" [M-up])
-(define-key input-decode-map "\e[1;3B" [M-down])
-(define-key input-decode-map "\e[1;3C" [M-right])
-(define-key input-decode-map "\e[1;3D" [M-left])
-(define-key input-decode-map "\e[1;6A" [C-S-up])
-(define-key input-decode-map "\e[1;6B" [C-S-down])
-(define-key input-decode-map "\e[1;6C" [C-S-right])
-(define-key input-decode-map "\e[1;6D" [C-S-left])
-(define-key input-decode-map "\e[1;7A" [C-M-up])
-(define-key input-decode-map "\e[1;7B" [C-M-down])
-(define-key input-decode-map "\e[1;7C" [C-M-right])
-(define-key input-decode-map "\e[1;7D" [C-M-left])
+(when (string= "xterm"
+               (car (split-string (getenv "TERM") "-")))
+  (define-key input-decode-map "\e[1;5A" [C-up])
+  (define-key input-decode-map "\e[1;5B" [C-down])
+  (define-key input-decode-map "\e[1;5C" [C-right])
+  (define-key input-decode-map "\e[1;5D" [C-left])
+  (define-key input-decode-map "\e[1;3A" [M-up])
+  (define-key input-decode-map "\e[1;3B" [M-down])
+  (define-key input-decode-map "\e[1;3C" [M-right])
+  (define-key input-decode-map "\e[1;3D" [M-left])
+  (define-key input-decode-map "\e[1;6A" [C-S-up])
+  (define-key input-decode-map "\e[1;6B" [C-S-down])
+  (define-key input-decode-map "\e[1;6C" [C-S-right])
+  (define-key input-decode-map "\e[1;6D" [C-S-left])
+  (define-key input-decode-map "\e[1;7A" [C-M-up])
+  (define-key input-decode-map "\e[1;7B" [C-M-down])
+  (define-key input-decode-map "\e[1;7C" [C-M-right])
+  (define-key input-decode-map "\e[1;7D" [C-M-left])
+  )
 
 
 ;; Fix PATH
@@ -72,7 +75,7 @@
           (lambda () (interactive) (column-marker-1 80)))
 
 (global-set-key
- (read-kbd-macro "C-x p") "import bpdb; bpdb.set_trace() # --miv DEBUG")
+ (read-kbd-macro "C-x p") "import pdb; pdb.set_trace() # --miv DEBUG")
 (global-set-key
  (read-kbd-macro "C-x P")
  "<?python\n  import pdb; pdb.set_trace() # --miv DEBUG\n ?>\n")
