@@ -1,6 +1,3 @@
-
-(setq debug-on-error t)
-
 (add-to-list 'load-path "~/.emacs-lib")
 
 (setq-default indent-tabs-mode nil) ; Tabs, I hate you. Get out.
