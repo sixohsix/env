@@ -1,5 +1,6 @@
+;; .emacs
 
-(add-to-list 'load-path "~/.emacs-lib")
+(add-to-list 'load-path (expand-file-name "~/.emacs-lib/"))
 
 (setq-default indent-tabs-mode nil) ; Tabs, I hate you. Get out.
 (setq inhibit-splash-screen t)      ; No Bullshit mode.
@@ -22,27 +23,6 @@
 (delete-selection-mode 1)
 
 (load-theme 'wombat)
-
-;; xterm keys
-(when (string= "xterm"
-               (car (split-string (getenv "TERM") "-")))
-  (define-key input-decode-map "\e[1;5A" [C-up])
-  (define-key input-decode-map "\e[1;5B" [C-down])
-  (define-key input-decode-map "\e[1;5C" [C-right])
-  (define-key input-decode-map "\e[1;5D" [C-left])
-  (define-key input-decode-map "\e[1;3A" [M-up])
-  (define-key input-decode-map "\e[1;3B" [M-down])
-  (define-key input-decode-map "\e[1;3C" [M-right])
-  (define-key input-decode-map "\e[1;3D" [M-left])
-  (define-key input-decode-map "\e[1;6A" [C-S-up])
-  (define-key input-decode-map "\e[1;6B" [C-S-down])
-  (define-key input-decode-map "\e[1;6C" [C-S-right])
-  (define-key input-decode-map "\e[1;6D" [C-S-left])
-  (define-key input-decode-map "\e[1;7A" [C-M-up])
-  (define-key input-decode-map "\e[1;7B" [C-M-down])
-  (define-key input-decode-map "\e[1;7C" [C-M-right])
-  (define-key input-decode-map "\e[1;7D" [C-M-left])
-  )
 
 
 ;; Fix PATH
@@ -69,7 +49,8 @@
 (require 'column-marker)
 (add-hook 'python-mode-hook
           (lambda () (interactive)
-            (smart-tab-mode 1)))
+            (smart-tab-mode 1)
+            ))
 
 (add-hook 'find-file-hook
           (lambda () (interactive) (column-marker-1 80)))
@@ -143,8 +124,8 @@
 (global-set-key (kbd "RET") 'newline-and-indent)
 
 ;; autopair braces () {} "" <> etc.
-(require 'autopair)
-(autopair-global-mode) ;; enable autopair in all buffers
+;;(require 'autopair)
+;;(autopair-global-mode) ;; enable autopair in all buffers
 
 (require 'miv-mark-zoom)
 (require 'miv-sexy-powerline)
