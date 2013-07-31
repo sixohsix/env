@@ -24,7 +24,6 @@
 
 (load-theme 'wombat)
 
-
 ;; Fix PATH
 (defun set-exec-path-from-shell-PATH ()
   "Set up Emacs' `exec-path' and PATH environment variable to match that used by the user's shell."
@@ -122,10 +121,6 @@
 
 ;; Automagically tab new lines
 (global-set-key (kbd "RET") 'newline-and-indent)
-
-;; autopair braces () {} "" <> etc.
-;;(require 'autopair)
-;;(autopair-global-mode) ;; enable autopair in all buffers
 
 (require 'miv-mark-zoom)
 (require 'miv-sexy-powerline)

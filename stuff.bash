@@ -37,7 +37,7 @@ alias ll='ls -al'
 alias develop='. ~/bin/develop.sh'
 alias n='nosetests -vs --nologcapture'
 alias dn='python abl/web/manage.py test -s'
-alias ssh='TERM=xterm-color ssh'
+#alias ssh='TERM=xterm-color ssh'
 
 #alias jobe='ssh mike@jobe.ca -t tmux -2u attach'
 alias jobe='mosh mike@jobe.ca -- tmux -2u attach'
@@ -53,11 +53,9 @@ gco() {
   develop
 }
 
-if which virtualenvwrapper.sh 2>&1 >/dev/null; then
-  WORKON_HOME="$HOME/.venvs2.7"
-  VIRTUALENVWRAPPER_PYTHON=`which python2.7`
-  . `which virtualenvwrapper.sh`
-fi
+
+use_python 2.7
+
 
 if [ "$TERM" = "xterm" ]; then
   TERM="xterm-256color"
