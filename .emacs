@@ -51,29 +51,29 @@
           (lambda () (interactive) (column-marker-1 80)))
 
 (global-set-key
- (read-kbd-macro "C-x p") "import pdb; pdb.set_trace() # --miv DEBUG")
+ (kbd "C-x p") "import pdb; pdb.set_trace() # --miv DEBUG")
 (global-set-key
- (read-kbd-macro "C-x P")
+ (kbd "C-x P")
  "<?python\n  import pdb; pdb.set_trace() # --miv DEBUG\n ?>\n")
-(global-set-key (read-kbd-macro "C-M-s") 'rgrep)
-(global-set-key (read-kbd-macro "C-M-k") 'kill-this-buffer)
-(global-set-key (read-kbd-macro "C-c c") 'delete-trailing-whitespace)
+(global-set-key (kbd "C-M-s") 'rgrep)
+(global-set-key (kbd "C-M-k") 'kill-this-buffer)
+(global-set-key (kbd "C-c c") 'delete-trailing-whitespace)
 
 ;; Anti-fat-finger quit mode
-(global-set-key (read-kbd-macro "C-x C-c") 'nil)
-(global-set-key (read-kbd-macro "C-x C-c q q") 'kill-emacs)
+(global-set-key (kbd "C-x C-c") 'nil)
+(global-set-key (kbd "C-x C-c q q") 'kill-emacs)
 
 ;; Anti-fat-finger overwrite mode.
 (global-set-key (kbd "<insert>") 'nil)
 (global-set-key (kbd "C-c C-c o") 'overwrite-mode)
 
 ;; Meta-left and right to switch buffers
-(global-set-key (read-kbd-macro "M-<left>") 'next-buffer)
-(global-set-key (read-kbd-macro "M-<right>") 'previous-buffer)
+(global-set-key (kbd "M-<left>") 'next-buffer)
+(global-set-key (kbd "M-<right>") 'previous-buffer)
 
 ;; home and end go around a line
-(global-set-key (read-kbd-macro "<home>") 'beginning-of-line)
-(global-set-key (read-kbd-macro "<end>")  'end-of-line)
+(global-set-key (kbd "<home>") 'beginning-of-line)
+(global-set-key (kbd "<end>")  'end-of-line)
 
 ;; Use F5 to refresh a file.
 (defun really-refresh-file ()
@@ -99,7 +99,7 @@
   :keymap iresize-mode-map
   :group 'iresize)
 (global-set-key
-  (read-kbd-macro "C-x t w") 'iresize-mode)
+  (kbd "C-x t w") 'iresize-mode)
 
 ;; Make terminal colors look good against black
 (setq ansi-term-color-vector
@@ -172,21 +172,21 @@
   (shell-command-on-region b e command (current-buffer) 't)
   )
 (global-set-key
- (read-kbd-macro "C-c i")
+ (kbd "C-c i")
  (lambda (&optional b e) (interactive "r")
    (sh-region-replace "reorder_imports2" b e)))
 (global-set-key
- (read-kbd-macro "C-c a")
+ (kbd "C-c a")
  (lambda (&optional b e) (interactive "r")
    (sh-region-replace "pyalphabetize" b e)))
 
 ;; Shift region left or right.
 (global-set-key
- (read-kbd-macro "M-]")
+ (kbd "M-]")
  (lambda (&optional b e) (interactive "r")
    (indent-rigidly b e 2)))
 (global-set-key
- (read-kbd-macro "M-[")
+ (kbd "M-[")
  (lambda (&optional b e) (interactive "r")
    (indent-rigidly b e -2)))
 
@@ -207,7 +207,7 @@
     )
 
   ;; C-Backslash is delete.
-  (global-set-key (read-kbd-macro "C-\\") 'delete-char)
+  (global-set-key (kbd "C-\\") 'delete-char)
 
   (if (eq 'ns window-system)
       (setq default-frame-alist
