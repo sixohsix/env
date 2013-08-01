@@ -15,10 +15,6 @@
 (tool-bar-mode 0)
 (transient-mark-mode 0)                     ; No highlight
 
-;; Insert mode is garbage.
-(global-set-key
-  (read-kbd-macro "<insert>") 'nil)
-
 ;; Behave like a normal editor and delete region when you type
 (delete-selection-mode 1)
 
@@ -66,6 +62,10 @@
 ;; Anti-fat-finger quit mode
 (global-set-key (read-kbd-macro "C-x C-c") 'nil)
 (global-set-key (read-kbd-macro "C-x C-c q q") 'kill-emacs)
+
+;; Anti-fat-finger overwrite mode.
+(global-set-key (kbd "<insert>") 'nil)
+(global-set-key (kbd "C-c C-c o") 'overwrite-mode)
 
 ;; Meta-left and right to switch buffers
 (global-set-key (read-kbd-macro "M-<left>") 'next-buffer)
@@ -180,6 +180,15 @@
  (lambda (&optional b e) (interactive "r")
    (sh-region-replace "pyalphabetize" b e)))
 
+;; Shift region left or right.
+(global-set-key
+ (read-kbd-macro "M-]")
+ (lambda (&optional b e) (interactive "r")
+   (indent-rigidly b e 2)))
+(global-set-key
+ (read-kbd-macro "M-[")
+ (lambda (&optional b e) (interactive "r")
+   (indent-rigidly b e -2)))
 
 (require 'haml-mode)
 (add-hook 'haml-mode-hook
