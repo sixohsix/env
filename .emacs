@@ -75,6 +75,10 @@
 (global-set-key (kbd "<home>") 'beginning-of-line)
 (global-set-key (kbd "<end>")  'end-of-line)
 
+;; Sort lines
+(global-set-key (kbd "C-c s") 'sort-lines)
+
+
 ;; Use F5 to refresh a file.
 (defun really-refresh-file ()
   (interactive)
