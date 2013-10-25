@@ -5,10 +5,9 @@ if [ "$1" ]; then
     for x in `set 2>&1 | grep "^VIRTUALENVWRAPPER_*=*" | cut -d '=' -f 1`; do 
       unset $x
     done
-    WORKON_HOME="$HOME/.venvs$1"
-    VIRTUALENVWRAPPER_PYTHON=`which python$1`
-    VIRTUALENVWRAPPER_VIRTUALENV=`which virtualenv-$1`
-    . `which virtualenvwrapper.sh`
+    export WORKON_HOME="$HOME/.venvs$1"
+    export VIRTUALENVWRAPPER_PYTHON=`which python$1`
+    export VIRTUALENVWRAPPER_VIRTUALENV=`which virtualenv-$1`
+    source `which virtualenvwrapper.sh`
   fi
 fi
-

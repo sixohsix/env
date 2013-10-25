@@ -1,0 +1,49 @@
+# zsh
+
+echo "mivstuff running"
+
+export REUSE_DB=1
+export EDITOR=zile
+
+_available() {
+    which $1 >/dev/null 2>&1
+}
+
+_available tput && [ `tput colors` != 0 ] \
+    && export CLICOLOR=1
+
+[ -d $HOME/Library/Haskell/bin ] && PATH=$HOME/Library/Haskell/bin:$PATH
+[ -d $HOME/.cabal/bin ] && PATH=$HOME/.cabal/bin:$PATH
+[ -d $HOME/bin ] && PATH=$HOME/bin:$PATH
+[ -d /usr/local/opt/ruby/bin/ ] && PATH=/usr/local/opt/ruby/bin/:$PATH
+
+_LOCALE=en_CA.UTF-8
+if [ $(locale -a | grep $_LOCALE) ]; then
+  export LC_ALL=$_LOCALE
+  export LANG=$_LOCALE
+fi
+
+alias g=git
+alias ll='ls -al'
+alias develop='. ~/bin/develop.sh'
+alias n='nosetests -vs --nologcapture'
+alias dn='python abl/web/manage.py test -s'
+
+alias jobe='mosh mike@jobe.ca -- tmux -2u attach'
+alias jobe-tunnel='ssh -D 9090 mike@jobe.ca'
+alias arc2='ssh mike@176.58.123.152 -t tmux -2u attach'
+#alias use_python="source ~/bin/use_python.sh"
+
+use_python () {
+  source ~/bin/use_python.sh $@
+}
+
+use_python 2.7
+
+if [ `uname` == "Darwin" ]; then
+  SED='sed -E'
+else
+  SED='sed -r'
+fi
+
+export SED
