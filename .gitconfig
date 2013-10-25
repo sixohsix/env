@@ -25,6 +25,8 @@
         interactive = auto
         ui = auto
         pager = true
+[branch]
+        autosetuprebase = always
 [giggle]
 	main-window-maximized = false
 	main-window-geometry = 1918x872+0+18
