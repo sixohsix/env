@@ -8,5 +8,3 @@ compinit
 
 autoload -U mivstuff
 mivstuff
-
-zstyle ':completion:*' menu select

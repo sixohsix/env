@@ -2,6 +2,8 @@
 
 echo "mivstuff running"
 
+zstyle ':completion:*' menu select
+
 export REUSE_DB=1
 export EDITOR=zile
 
@@ -11,6 +13,15 @@ _available() {
 
 _available tput && [ `tput colors` != 0 ] \
     && export CLICOLOR=1
+
+for maybePath in \
+   $HOME/Library/Haskell/bin \
+   $HOME/.cabal/bin \
+   $HOME/bin \
+   /usr/local/opt/ruby/bin/; do
+  [ -d $maybePath ] && path=($maybePath $path)
+done
+
 
 [ -d $HOME/Library/Haskell/bin ] && PATH=$HOME/Library/Haskell/bin:$PATH
 [ -d $HOME/.cabal/bin ] && PATH=$HOME/.cabal/bin:$PATH
