@@ -16,6 +16,7 @@
         pp = push -u origin HEAD
         s = status -sb
         ru = !git rebase origin/`git rev-parse --abbrev-ref HEAD`
+        rui = !git rebase origin/`git rev-parse --abbrev-ref HEAD` -i
         setuser = !git_setuser.py
         addnew = !git status -s | cut -c 4- | xargs git add
 [color]
