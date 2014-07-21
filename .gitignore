@@ -2,3 +2,4 @@
 *~
 *.o
 *.elc
+.DS_Store
