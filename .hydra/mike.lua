@@ -1,4 +1,4 @@
--- mike.lua v2014.07.14
+-- mike.lua v2014.07.21
 
 local mike = {}
 
@@ -22,8 +22,13 @@ function mike.activateorshoworhide(app)
     end
 end
 
-function mike.activateorshoworhidebytitle(title)
-    fnutils.each(mike.runningbytitle(title), mike.activateorshoworhide)
+function mike.runoractivateorshoworhidebytitle(title)
+    local apps = mike.runningbytitle(title)
+    if apps[1] ~= nil then
+        fnutils.each(mike.runningbytitle(title), mike.activateorshoworhide)
+    else
+        application.launchorfocus(title)
+    end
 end
 
 return mike

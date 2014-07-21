@@ -80,11 +80,7 @@ end
 
 -- hotkey.bind({"cmd", "alt", "ctrl"}, "D", donate)
 
-local function opendictionary()
-  application.launchorfocus("Dictionary")
-end
-
-hotkey.bind(mash, 'D', opendictionary)
+hotkey.bind(mash, 'D', function() mike.runoractivateorshoworhidebytitle("Dictionary") end)
 
 hotkey.bind(mash, ';', function() ext.grid.snap(window.focusedwindow()) end)
 hotkey.bind(mash, "'", function() fnutils.map(window.visiblewindows(), ext.grid.snap) end)
@@ -117,4 +113,4 @@ hotkey.bind(mash, 'O', ext.grid.resizewindow_shorter)
 hotkey.bind(mash, 'X', logger.show)
 hotkey.bind(mash, "R", repl.open)
 
-hotkey.bind(mash, 'T', function() mike.activateorshoworhidebytitle("Twitter") end)
+hotkey.bind(mash, 'T', function() mike.runoractivateorshoworhidebytitle("Twitter") end)
