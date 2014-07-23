@@ -25,7 +25,7 @@ _available tput && [ `tput colors` != 0 ] \
 
 [ -e $HOME/.pystartup ] && export PYTHONSTARTUP=$HOME/.pystartup
 
-_LOCALE=en_CA.UTF-8
+_LOCALE=en_US.UTF-8
 
 if [ $(locale -a | grep $_LOCALE) ]; then
   export LC_ALL=$_LOCALE

@@ -2,4 +2,8 @@
 *~
 *.o
 *.elc
+<<<<<<< HEAD
 .DS_Store
+=======
+.DS_Store
+>>>>>>> Stuff

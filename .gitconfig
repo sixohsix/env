@@ -1,8 +1,16 @@
 [alias]
+	branch-delete = !mv .git/refs/heads/$1 .git/refs/deleted-heads/ && echo Deleted
+	branch-undelete = !mv .git/refs/deleted-heads/$1 .git/refs/heads/ && echo Resurrected
+	branch-nuke = !git branch-delete $1 && git push --delete origin $1 && echo Nuked
+	current-branch = rev-parse --abbrev-ref HEAD
+	last-branch = !ls -t .git/refs/heads/ | grep -v master | head -n 1
+	temp-tag = !git tag -f $USER/`git rev-parse --abbrev-ref HEAD`.`date +'%Y%m%d.%H%M'`
+	setuser = !git_setuser.py
+	setmagic = !mkdir -p .git/refs/deleted-heads
+
+	bd = !git branch-delete
         b = branch
         bb = branch -avv
-        bd = branch -d
-        bnuke = !git branch -d $1 && git push --delete origin
         c = !sh gcommit.sh
         co = checkout
         d = diff
@@ -12,13 +20,18 @@
         l = log
         lt = log --oneline --graph
         lf = log --name-status
+	m = merge --no-ff --log
+	mm = !git m `git last-branch`
         p = pull
-        pp = push -u origin HEAD
+	pb = pull --rebase
+        pp = !git push -u origin HEAD $@
+	ppcrit = push critic HEAD
+	ppcritup = !git push critic HEAD:r/$USER/`git rev-parse --abbrev-ref HEAD`
         s = status -sb
+	t = !git tag -l $USER/'*'
+	tt = !git temp-tag
         ru = !git rebase origin/`git rev-parse --abbrev-ref HEAD`
-        rui = !git rebase origin/`git rev-parse --abbrev-ref HEAD` -i
-        setuser = !git_setuser.py
-        addnew = !git status -s | cut -c 4- | xargs git add
+	rmi = !git tt && git rebase -i origin/master
 [color]
         diff = auto
         status = auto
@@ -33,6 +46,11 @@
 [pivotal]
 	full-name = Mike Verdone
 [user]
-	name = Mike Verdone
+	name = miv
+	email = miv@ableton.com
 [log]
 	date = local
+[http]
+	postBuffer = 1073741824
+[core]
+	autocrlf = input

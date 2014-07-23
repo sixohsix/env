@@ -1,0 +1,3 @@
+#!/bin/sh
+
+subl -nw `git status -s | grep ^UU | cut -c 4-`
