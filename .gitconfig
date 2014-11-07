@@ -7,6 +7,11 @@
 	temp-tag = !git tag -f $USER/`git rev-parse --abbrev-ref HEAD`.`date +'%Y%m%d.%H%M'`
 	setuser = !git_setuser.py
 	setmagic = !mkdir -p .git/refs/deleted-heads
+	merged-branches = !git branch --no-color --merged origin/master | grep -v \\*
+        delete-merged-branches = !git branch -d `git merged-branches`
+	submodule-update-everything = submodule update --init --recursive
+	submodule-what = submodule -q foreach 'echo $path: && git status -s'
+	stash-all = submodule foreach -q 'git status -s | read && git stash -u ||  true'
 
 	bd = !git branch-delete
         b = branch
@@ -28,10 +33,13 @@
 	ppcrit = push critic HEAD
 	ppcritup = !git push critic HEAD:r/$USER/`git rev-parse --abbrev-ref HEAD`
         s = status -sb
+	sue = !git submodule-update-everything
 	t = !git tag -l $USER/'*'
 	tt = !git temp-tag
         ru = !git rebase origin/`git rev-parse --abbrev-ref HEAD`
 	rmi = !git tt && git rebase -i origin/master
+	what = !git submodule-what
+	sta = !git stash-all
 [color]
         diff = auto
         status = auto

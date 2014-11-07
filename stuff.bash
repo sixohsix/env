@@ -17,11 +17,17 @@ _available() {
 _available tput && [ `tput colors` != 0 ] \
     && export CLICOLOR=1
 
-[ -d /opt/ghc/bin ] && PATH=/opt/ghc/bin:$PATH
-[ -d $HOME/Library/Haskell/bin ] && PATH=$HOME/Library/Haskell/bin:$PATH
-[ -d $HOME/.cabal/bin ] && PATH=$HOME/.cabal/bin:$PATH
+# Add GHC 7.8.3 to the PATH, via http://ghcformacosx.github.io/
+export GHC_DOT_APP="/Applications/ghc-7.8.3.app"
+if [ -d "$GHC_DOT_APP" ]; then
+    export PATH="${HOME}/.cabal/bin:${HOME}/Library/Haskell/bin:${GHC_DOT_APP}/Contents/bin:${PATH}"
+else
+    [ -d /opt/ghc/bin ] && PATH=/opt/ghc/bin:$PATH
+    [ -d $HOME/Library/Haskell/bin ] && PATH=$HOME/Library/Haskell/bin:$PATH
+    [ -d $HOME/.cabal/bin ] && PATH=$HOME/.cabal/bin:$PATH
+fi
+
 [ -d $HOME/bin ] && PATH=$HOME/bin:$PATH
-[ -d /usr/local/opt/ruby/bin/ ] && PATH=/usr/local/opt/ruby/bin/:$PATH
 
 [ -e $HOME/.pystartup ] && export PYTHONSTARTUP=$HOME/.pystartup
 
@@ -102,4 +108,8 @@ GIT_COMPLETION_SCRIPT="~/.git-completion.bash"
 if [ -e $GIT_COMPLETION_SCRIPT ]; then
   . $GIT_COMPLETION_SCRIPT
   __git_complete g __git_main
+fi
+
+if [ -e /Volumes/GuiEnv_64/ ]; then
+  . /Volumes/GuiEnv_64/setup_qt_env.sh
 fi
