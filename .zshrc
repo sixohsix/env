@@ -8,3 +8,6 @@ compinit
 
 autoload -U mivstuff
 mivstuff
+
+# added by travis gem
+[ -f /Users/miv/.travis/travis.sh ] && source /Users/miv/.travis/travis.sh

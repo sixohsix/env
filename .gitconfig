@@ -3,13 +3,14 @@
 	branch-undelete = !mv .git/refs/deleted-heads/$1 .git/refs/heads/ && echo Resurrected
 	branch-nuke = !git branch-delete $1 && git push --delete origin $1 && echo Nuked
 	current-branch = rev-parse --abbrev-ref HEAD
+	commit-amend = commit -a --amend
 	last-branch = !ls -t .git/refs/heads/ | grep -v master | head -n 1
 	temp-tag = !git tag -f $USER/`git rev-parse --abbrev-ref HEAD`.`date +'%Y%m%d.%H%M'`
 	setuser = !git_setuser.py
 	setmagic = !mkdir -p .git/refs/deleted-heads
 	merged-branches = !git branch --no-color --merged origin/master | grep -v \\*
         delete-merged-branches = !git branch -d `git merged-branches`
-	submodule-update-everything = submodule update --init --recursive
+	submodule-update-everything = submodule update --recursive --init
 	submodule-what = submodule -q foreach 'echo $path: && git status -s'
 	stash-all = submodule foreach -q 'git status -s | read && git stash -u ||  true'
 
@@ -17,6 +18,7 @@
         b = branch
         bb = branch -avv
         c = !sh gcommit.sh
+	ca = !git commit-amend
         co = checkout
         d = diff
         df = diff --name-status
@@ -37,7 +39,7 @@
 	t = !git tag -l $USER/'*'
 	tt = !git temp-tag
         ru = !git rebase origin/`git rev-parse --abbrev-ref HEAD`
-	rmi = !git tt && git rebase -i origin/master
+	rmi = !git tt && git rebase -i --autosquash origin/master
 	what = !git submodule-what
 	sta = !git stash-all
 [color]
@@ -62,3 +64,5 @@
 	postBuffer = 1073741824
 [core]
 	autocrlf = input
+[push]
+	default = simple

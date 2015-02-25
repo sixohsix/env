@@ -31,6 +31,8 @@ fi
 
 [ -e $HOME/.pystartup ] && export PYTHONSTARTUP=$HOME/.pystartup
 
+[ -d $HOME/node_modules/.bin ] && PATH=$HOME/node_modules/.bin:$PATH
+
 _LOCALE=en_US.UTF-8
 
 if [ $(locale -a | grep $_LOCALE) ]; then
@@ -113,3 +115,8 @@ fi
 if [ -e /Volumes/GuiEnv_64/ ]; then
   . /Volumes/GuiEnv_64/setup_qt_env.sh
 fi
+
+alias c="./modules/build-system/scripts/configure.py --ninja --ccache"
+alias b="nice ./modules/build-system/scripts/build.py --ninja"
+alias r="./modules/build-system/scripts/run.py --ninja"
+alias t="./modules/build-system/scripts/test.py --ninja"
