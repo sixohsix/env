@@ -1,6 +1,5 @@
 # bash
 
-export PS1='\u@\h:\W$ '
 export REUSE_DB=1
 export EDITOR=zile
 
@@ -28,6 +27,7 @@ else
 fi
 
 [ -d $HOME/bin ] && PATH=$HOME/bin:$PATH
+[ -d /c/Python27 ] && PATH=$PATH:/c/Python27
 
 [ -e $HOME/.pystartup ] && export PYTHONSTARTUP=$HOME/.pystartup
 
@@ -35,7 +35,7 @@ fi
 
 _LOCALE=en_US.UTF-8
 
-if [ $(locale -a | grep $_LOCALE) ]; then
+if _available locale && [ $(locale -a | grep $_LOCALE) ]; then
   export LC_ALL=$_LOCALE
   export LANG=$_LOCALE
 fi
@@ -61,9 +61,7 @@ gco() {
   develop
 }
 
-
-use_python 2.7
-
+_available virtualenvwrapper.sh && use_python 2.7
 
 if [ "$TERM" = "xterm" ]; then
   TERM="xterm-256color"
@@ -103,7 +101,9 @@ function proml {
   PS1="$GREEN\u@\h:\W$LIGHT_GRAY\$(parse_git_branch)$RED\$(parse_git_status)$DEFAULT\$ "
 }
 
-proml
+if [ `uname` = "Darwin" ]; then
+  proml
+fi
 
 GIT_COMPLETION_SCRIPT="~/.git-completion.bash"
 
@@ -116,7 +116,22 @@ if [ -e /Volumes/GuiEnv_64/ ]; then
   . /Volumes/GuiEnv_64/setup_qt_env.sh
 fi
 
-alias c="./modules/build-system/scripts/configure.py --ninja --ccache"
-alias b="nice ./modules/build-system/scripts/build.py --ninja"
-alias r="./modules/build-system/scripts/run.py --ninja"
-alias t="./modules/build-system/scripts/test.py --ninja"
+if [ -e /c/GuiEnv_64/ ]; then
+  . /c/GuiEnv_64/setup_qt_env.sh
+fi
+
+if [ -e /cygdrive/c/Ruby21-x64/bin/ ]; then
+  PATH=$PATH:/cygdrive/c/Ruby21-x64/bin
+fi
+
+if [ -e /c/Ruby21-x64/bin/ ]; then
+  PATH=$PATH:/c/Ruby21-x64/bin
+fi
+
+_available ninja && NINJA="--ninja"
+_available ccache && CCACHE="--ccache"
+
+alias c="./modules/build-system/scripts/configure.py $NINJA $CCACHE"
+alias b="./modules/build-system/scripts/build.py $NINJA"
+alias r="./modules/build-system/scripts/run.py $NINJA"
+alias t="./modules/build-system/scripts/test.py $NINJA"
