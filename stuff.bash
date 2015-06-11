@@ -120,18 +120,9 @@ if [ -e /c/GuiEnv_64/ ]; then
   . /c/GuiEnv_64/setup_qt_env.sh
 fi
 
-if [ -e /cygdrive/c/Ruby21-x64/bin/ ]; then
-  PATH=$PATH:/cygdrive/c/Ruby21-x64/bin
-fi
-
 if [ -e /c/Ruby21-x64/bin/ ]; then
   PATH=$PATH:/c/Ruby21-x64/bin
 fi
 
 _available ninja && NINJA="--ninja"
 _available ccache && CCACHE="--ccache"
-
-alias c="./modules/build-system/scripts/configure.py $NINJA $CCACHE"
-alias b="./modules/build-system/scripts/build.py $NINJA"
-alias r="./modules/build-system/scripts/run.py $NINJA"
-alias t="./modules/build-system/scripts/test.py $NINJA"

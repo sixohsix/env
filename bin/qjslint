@@ -1,0 +1,11 @@
+#!/bin/bash
+
+V=${1-"*.js"}
+
+echo $V
+
+find . -name ${V} -print -exec bash -c 'cat {} | egrep -v ^\.\(pragma\|import\)' \;
+
+     # > tmp.js \
+     #    && echo FILE: {} \
+     #    && jslint tmp.js' \;

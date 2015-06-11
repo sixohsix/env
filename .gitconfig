@@ -10,6 +10,9 @@
 	setmagic = !mkdir -p .git/refs/deleted-heads
 	merged-branches = !git branch --no-color --merged origin/master | grep -v \\*
         delete-merged-branches = !git branch -d `git merged-branches`
+	recent-branches = !git-recent-branches
+	recent-branches-remote = !git-recent-branches-remote
+	recent-branch-checkout = !git-recent-branch-checkout
 	submodule-update-everything = submodule update --recursive --init
 	submodule-what = submodule -q foreach 'echo $path: && git status -s'
 	stash-all = submodule foreach -q 'git status -s | read && git stash -u ||  true'
@@ -17,6 +20,9 @@
 	bd = !git branch-delete
         b = branch
         bb = branch -avv
+	br = !git recent-branches
+	brr = !git recent-branches-remote
+	brc = !git recent-branch-checkout
         c = !sh gcommit.sh
 	ca = !git commit-amend
         co = checkout
