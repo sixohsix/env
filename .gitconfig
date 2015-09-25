@@ -15,7 +15,6 @@
 	sync-submodules = !git submodule status | perl -ne '/^ ([^ ]+) ([^ ]+)/; print "(cd ../live/$2 && git checkout $1)\n"' | bash
 	fetch-this = fetch origin master HEAD
 	pull-this = !git fetch-this && git merge FETCH_HEAD
-	push-this = !git push -u origin HEAD $@
 
 	bd = !git branch-delete
     b = branch
@@ -36,7 +35,7 @@
 	m = merge --no-ff --log
 	mm = !git m `git last-branch`
     p = !git pull-this
-    pp = !git push-this $@
+    pp = push-this
 	ppcrit = push critic HEAD
 	ppcritup = !git push critic HEAD:r/$USER/`git rev-parse --abbrev-ref HEAD`
     s = status -sb
