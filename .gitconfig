@@ -6,7 +6,6 @@
 	commit-amend = commit -a --amend
 	last-branch = !ls -t .git/refs/heads/ | grep -v master | head -n 1
 	temp-tag = !git tag -f $USER/`git rev-parse --abbrev-ref HEAD`.`date +'%Y%m%d.%H%M'`
-	setuser = !git_setuser.py
 	setmagic = !mkdir -p .git/refs/deleted-heads
 	merged-branches = !git branch --no-color --merged origin/master | grep -v \\*
     delete-merged-branches = !git branch -d `git merged-branches`
@@ -14,6 +13,9 @@
 	submodule-what = submodule -q foreach 'echo $path: && git status -s'
 	stash-all = submodule foreach -q 'git status -s | read && git stash -u ||  true'
 	sync-submodules = !git submodule status | perl -ne '/^ ([^ ]+) ([^ ]+)/; print "(cd ../live/$2 && git checkout $1)\n"' | bash
+	fetch-this = fetch origin master HEAD
+	pull-this = !git fetch-this && git merge FETCH_HEAD
+	push-this = !git push -u origin HEAD $@
 
 	bd = !git branch-delete
     b = branch
@@ -33,9 +35,8 @@
     lf = log --name-status
 	m = merge --no-ff --log
 	mm = !git m `git last-branch`
-    p = pull
-	pb = pull --rebase
-    pp = !git push -u origin HEAD $@
+    p = !git pull-this
+    pp = !git push-this $@
 	ppcrit = push critic HEAD
 	ppcritup = !git push critic HEAD:r/$USER/`git rev-parse --abbrev-ref HEAD`
     s = status -sb
