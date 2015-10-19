@@ -1,0 +1,16 @@
+{
+    "configure": [
+        "--ninja",
+        "--no-pch",
+        "--ccache",
+    ],
+
+    "build": [
+        "--configuration", "Release",
+        "--ninja",
+    ],
+
+    "run": [
+        "--configuration", "Release",
+    ]
+}
