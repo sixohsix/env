@@ -112,8 +112,8 @@ if [ -e $GIT_COMPLETION_SCRIPT ]; then
   __git_complete g __git_main
 fi
 
-if [ -e /Volumes/GuiEnv_64/ ]; then
-  . /Volumes/GuiEnv_64/setup_qt_env.sh
+if [ -e /Volumes/GuiEnv_*64/ ]; then
+  . /Volumes/GuiEnv_*64/setup_qt_env.sh
 fi
 
 if [ -e /c/GuiEnv_64/ ]; then

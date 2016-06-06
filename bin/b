@@ -1,0 +1,8 @@
+#!/bin/bash
+
+ctime -begin ~/build_times.dat
+bash -c '
+    ./modules/build-system/scripts/configure.py \
+        && nice ./modules/build-system/scripts/build.py -t LiveGui \
+        && nice ./modules/build-system/scripts/build.py -c Debug'
+ctime -end ~/build_times.dat

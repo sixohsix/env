@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# USAGE
+#   git recent-branch-checkout [n]
+#
+# Checkout the nth most recently modified branch. Defaulting to the first if n is not
+# given. Use git recent-branches to see your branches in most recent order.
+
 BRANCH=$@
 
 if [ -z $BRANCH ]; then

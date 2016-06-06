@@ -6,11 +6,11 @@
     ],
 
     "build": [
-        "--configuration", "Release",
+        "--configuration", "Debug",
         "--ninja",
     ],
 
     "run": [
-        "--configuration", "Release",
+        "--configuration", "Debug",
     ]
 }

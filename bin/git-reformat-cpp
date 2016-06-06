@@ -1,0 +1,3 @@
+#!/bin/bash
+
+../source-utils/reformat.py `git status -s | egrep '^.*\.([ch]pp|h)' | cut -c 4-`

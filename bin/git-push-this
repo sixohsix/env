@@ -1,20 +1,9 @@
 #!/bin/bash
 
-confirm () {
-    # call with a prompt string or use a default
-    read -r -p "${1:-Are you sure? [y/N]} " response
-    case $response in
-        [yY][eE][sS]|[yY])
-            true
-            ;;
-        *)
-            false
-            ;;
-    esac
-}
+# USAGE
+#   git push-this [-f]
+#
+# Push ONLY your currently checked out branch to the branch with the same name on the
+# origin remote. -f will force it.
 
-pu () {
-    git push -u origin HEAD $@
-}
-
-pu || (echo ; confirm "Push failed. Force push?" && pu -f)
+git push $@ origin HEAD
