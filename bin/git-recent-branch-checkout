@@ -1,15 +1,1 @@
-#!/bin/bash
-
-# USAGE
-#   git recent-branch-checkout [n]
-#
-# Checkout the nth most recently modified branch. Defaulting to the first if n is not
-# given. Use git recent-branches to see your branches in most recent order.
-
-BRANCH=$@
-
-if [ -z $BRANCH ]; then
-  BRANCH=1
-fi
-
-git checkout `git for-each-ref --sort=-committerdate refs/heads/ '--format=%(refname:short)' | head -n $BRANCH | tail -n 1`
+/Users/miv/projects/tools/GitEnhancement/scripts/git-recent-branch-checkout

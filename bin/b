@@ -1,8 +1,9 @@
 #!/bin/bash
 
 ctime -begin ~/build_times.dat
-bash -c '
+bash -c "
     ./modules/build-system/scripts/configure.py \
-        && nice ./modules/build-system/scripts/build.py -t LiveGui \
-        && nice ./modules/build-system/scripts/build.py -c Debug'
+        && nice ./modules/build-system/scripts/build.py -c Debug $@"
+RET=$?
 ctime -end ~/build_times.dat
+exit $RET

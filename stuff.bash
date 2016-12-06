@@ -126,3 +126,6 @@ fi
 
 _available ninja && NINJA="--ninja"
 _available ccache && CCACHE="--ccache"
+
+export MASTER_BRANCH=master-10
+

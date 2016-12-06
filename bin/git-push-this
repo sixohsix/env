@@ -1,9 +1,1 @@
-#!/bin/bash
-
-# USAGE
-#   git push-this [-f]
-#
-# Push ONLY your currently checked out branch to the branch with the same name on the
-# origin remote. -f will force it.
-
-git push $@ origin HEAD
+/Users/miv/projects/tools/GitEnhancement/scripts/git-push-this

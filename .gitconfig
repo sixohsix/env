@@ -55,10 +55,6 @@
     interactive = auto
     ui = auto
     pager = true
-[giggle]
-	main-window-maximized = false
-	main-window-geometry = 1918x872+0+18
-	file-view-vpane-position = 410
 [pivotal]
 	full-name = Mike Verdone
 [user]
@@ -70,7 +66,14 @@
 	postBuffer = 1073741824
 [core]
 	autocrlf = input
+	excludefiles = /Users/miv/.gitignore_global
 [push]
 	default = simple
 [rebase]
 	autosquash = true
+[submodule]
+	fetchJobs = 4
+[diff]
+	compactionHeuristic = true
+[branch]
+	autosetrebase = always

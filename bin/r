@@ -1,0 +1,9 @@
+#!/bin/bash
+
+osascript -e '
+
+tell app "Xcode"
+  activate
+  run workspace document 1
+end tell
+'

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+find Projects src \
+  -name 'Unity' -prune -o -name 'Impl' -prune -o -name 'boost' -prune -o -print \
+  | ctags -L - -h .h.hpp --totals=yes
