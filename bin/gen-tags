@@ -1,5 +1,14 @@
 #!/bin/sh
 
 find Projects src \
-  -name 'Unity' -prune -o -name 'Impl' -prune -o -name 'boost' -prune -o -print \
-  | ctags -L - -h .h.hpp --totals=yes
+  -name 'Unity' -prune \
+    -o -name 'Impl' -prune \
+    -o -name 'boost' -prune \
+    -o -type f -print \
+  | ctags \
+    -L - -h .h.hpp --totals=yes \
+    '--regex-C++=/MUnitTest\((.*)\)/MUnitTest_\1/' \
+    '--regex-C++=/TEST(_F)?\((.*), *(.*)\)/GTest_\2_\3/' \
+    '--regex-C++=/#define (.*)_h//' \
+    2>&1 \
+  | grep -v 'null expansion of name pattern'
